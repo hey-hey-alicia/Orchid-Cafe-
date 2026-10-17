@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orchid Cafe — Fresh food, made fast | Vietnamese kitchen in St Leonards</title>
+<meta name="description" content="Vietnamese family cooking built for your workday. Phở, bánh mì and phin coffee, 5 minutes' walk from St Leonards Station. 38 Atchison St, St Leonards NSW.">
+<meta property="og:title" content="Orchid Cafe — Fresh food, made fast">
+<meta property="og:description" content="Vietnamese family cooking, 5 min from St Leonards Station.">
+<meta property="og:image" content="assets/terrace.jpg">
+<meta name="theme-color" content="#17301F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Caveat:wght@500;700&amp;family=Homemade+Apple&amp;family=Instrument+Serif:ital@0;1&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0;background:#F6F4EC}
+a{color:#2E6B4A}a:hover{color:#17301F}
+*{box-sizing:border-box}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@keyframes marquee{to{transform:translateX(-50%)}}
+@keyframes dash{to{stroke-dashoffset:-40}}
+@keyframes jitter{0%,86%,100%{transform:rotate(0)}88%{transform:rotate(-1.6deg) translateX(-2px)}90%{transform:rotate(1.4deg) translateX(2px)}92%{transform:rotate(-1deg)}94%{transform:rotate(.7deg)}96%{transform:rotate(0)}}
+.oc-bowl{animation:spin 90s linear infinite}
+.oc-rise{animation:rise 1s cubic-bezier(.2,.7,.1,1) both}
+.oc-marquee{animation:marquee 38s linear infinite}
+.oc-route{animation:dash 1.6s linear infinite}
+.oc-jitter{animation:jitter 6s ease-in-out 1.5s infinite;transform-origin:50% 60%}
+.oc-flip{transition:transform .9s cubic-bezier(.3,.7,.1,1)}
+.oc-stub{transition:transform .8s cubic-bezier(.5,0,.2,1),opacity .8s}
+.oc-btn{transition:transform .25s,box-shadow .25s,background .25s}
+.oc-btn:hover{transform:translateY(-2px)}
+.oc-cta{box-shadow:0 0 0 0 rgba(229,143,180,.0),0 14px 30px -12px rgba(0,0,0,.45)}
+.oc-cta:hover{box-shadow:0 0 0 6px rgba(247,195,218,.45),0 18px 34px -12px rgba(0,0,0,.5)}
+.oc-pc{transition:transform .45s cubic-bezier(.2,.7,.1,1),box-shadow .45s}
+.oc-pc:hover{transform:translateY(-5px) !important;box-shadow:0 26px 50px -26px rgba(23,48,31,.45) !important}
+/* hero */
+.oc-hero{position:relative;height:100svh;min-height:640px;max-height:920px;border-radius:28px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between}
+.oc-bowlwrap{position:absolute;left:50%;bottom:-22%;transform:translateX(-50%);width:min(560px,46vw);aspect-ratio:1/1;border-radius:50%;box-shadow:0 60px 120px -30px rgba(5,20,8,.75);z-index:1}
+.oc-herobottom{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;gap:14px;padding:0 clamp(14px,2.4vw,32px) clamp(14px,2.4vw,32px)}
+/* bento */
+.oc-bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+.oc-l{grid-column:span 6}
+.oc-p{grid-column:span 3}
+@media (max-width:1000px){.oc-l{grid-column:span 12}.oc-p{grid-column:span 6}}
+@media (max-width:760px){
+.oc-hide-sm{display:none !important}
+.oc-bowlwrap{width:78vw;bottom:auto;top:47%;}
+.oc-herobottom{flex-direction:column;align-items:stretch}
+.oc-stats{flex-direction:row !important;width:100% !important}
+.oc-stats>div{flex:1}
+.oc-quotecta{position:static !important;transform:none !important;margin-top:20px}
+}
+@media (max-width:480px){.oc-p{grid-column:span 12}}
+@media (prefers-reduced-motion:reduce){.oc-bowl,.oc-marquee,.oc-route,.oc-rise,.oc-jitter{animation:none}}
+
+.oc-day{min-height:44px;border-radius:10px;font-family:inherit;font-weight:800;font-size:13px;cursor:pointer;border:2px solid #17301F;background:#FFFFFF;color:#17301F}
+.oc-day.oc-closed{border:2px dashed #B9B3A0;background:transparent;color:#7A7566;text-decoration:line-through}
+.oc-day[aria-pressed="true"]{background:#17301F;color:#F6F4EC}
+#oc-flip.is-flipped{transform:rotateY(180deg)}
+#oc-stub.is-torn{transform:translate(100px,70px) rotate(22deg);opacity:0;pointer-events:none}
+#oc-drawer[hidden],#oc-reset[hidden]{display:none !important}
+html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto !important}.lenis.lenis-stopped{overflow:hidden}
+</style>
+</head>
+<body>
+<div style="font-family: Manrope, system-ui, sans-serif; color: #17301F; background: #F6F4EC; overflow-x: hidden; width: 100%">
+
+<!-- ============ 1. HERO (edge-to-edge, one screen) ============ -->
+<section id="top" style="padding: 6px">
+<div class="oc-hero" style="background: #3E6B1E">
+<img src="assets/terrace.jpg" alt="Aerial view of terraced green rice paddies" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+<div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(16,40,22,.62) 0%, rgba(16,40,22,.28) 45%, rgba(16,40,22,.55) 100%)"></div>
+
+<!-- nav -->
+<nav style="position: relative; z-index: 4; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: clamp(14px, 2vw, 22px) clamp(14px, 2.4vw, 32px)">
+<a href="#top" style="text-decoration: none; color: #FBF8EF; display: flex; align-items: baseline; gap: 10px">
+<span style="font-family: 'Instrument Serif', serif; font-size: 30px; letter-spacing: -.01em">Orchid</span>
+<span class="oc-hide-sm" style="font-family: Caveat, cursive; font-size: 20px; color: #F7C3DA">bếp nhà Việt</span>
+</a>
+<div style="display: flex; gap: 4px; background: rgba(251,248,239,.14); backdrop-filter: blur(12px); border: 1px solid rgba(251,248,239,.3); border-radius: 999px; padding: 4px">
+<a href="#story" class="oc-hide-sm" style="text-decoration: none; color: #FBF8EF; font-size: 14px; font-weight: 700; padding: 10px 16px; border-radius: 999px; min-height: 40px; display: inline-flex; align-items: center">Our story</a>
+<a href="#menu" style="text-decoration: none; color: #FBF8EF; font-size: 14px; font-weight: 700; padding: 10px 16px; border-radius: 999px; min-height: 40px; display: inline-flex; align-items: center">Menu</a>
+<a href="#visit" style="text-decoration: none; color: #FBF8EF; font-size: 14px; font-weight: 700; padding: 10px 16px; border-radius: 999px; min-height: 40px; display: inline-flex; align-items: center">Visit</a>
+</div>
+</nav>
+
+<!-- headline -->
+<div class="oc-rise" style="position: relative; z-index: 3; text-align: center; padding: 0 16px; margin-top: -8px">
+<div style="display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px; border-radius: 999px; background: rgba(251,248,239,.16); border: 1px solid rgba(251,248,239,.32); color: #FBF8EF; font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase">
+<span>St Leonards</span><span style="width: 4px; height: 4px; border-radius: 50%; background: #F7C3DA"></span><span>Vietnamese kitchen</span>
+</div>
+<h1 style="margin: 14px 0 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(58px, 9.6vw, 150px); line-height: .86; letter-spacing: -.035em; color: #FBF8EF; text-shadow: 0 4px 40px rgba(5,20,8,.35)">Fresh food,<br><em style="font-style: italic; color: #F7C3DA">made fast.</em></h1>
+<p style="margin: 14px auto 0; max-width: 460px; font-size: clamp(14px, 1.3vw, 17px); line-height: 1.5; font-weight: 600; color: #FBF8EF">Vietnamese family cooking, built for your workday.</p>
+</div>
+
+<!-- bowl -->
+<div class="oc-bowlwrap">
+<img class="oc-bowl" src="assets/pho.png" alt="Top-down bowl of beef phở with herbs, chilli and rice noodles" style="width: 100%; height: 100%; object-fit: contain; border-radius: 50%">
+</div>
+
+<!-- bottom row -->
+<div class="oc-herobottom">
+<div style="width: min(360px, 100%); display: flex; flex-direction: column; gap: 10px">
+<div style="background: rgba(251,248,239,.95); backdrop-filter: blur(10px); border-radius: 22px; padding: 16px 18px; display: grid; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px">
+<div>
+<div style="font-family: Anton, sans-serif; font-size: 22px; line-height: 1; text-transform: uppercase">Call ahead · skip the queue</div>
+<div style="font-size: 13px; margin-top: 4px">Bagged and waiting when you walk in.</div>
+</div>
+<a class="oc-btn" href="tel:0423245052" aria-label="Call Orchid Cafe on 0423 245 052" style="flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%; background: #17301F; color: #FBF8EF; display: flex; align-items: center; justify-content: center">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg>
+</a>
+</div>
+<div style="border-top: 1px dashed #CFC9B6; padding-top: 10px; display: flex; justify-content: space-between; align-items: center; gap: 10px">
+<div>
+<div style="font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #C2558A">Office catering</div>
+<div style="font-family: 'Instrument Serif', serif; font-size: 22px; line-height: 1.05">Feed the whole meeting.</div>
+</div>
+<a href="mailto:Info@orchidcafe.net?subject=Catering%20enquiry" style="font-size: 13px; font-weight: 800; white-space: nowrap; min-height: 44px; display: inline-flex; align-items: center">Enquire →</a>
+</div>
+</div>
+<a class="oc-btn oc-cta" href="#menu" style="text-decoration: none; background: #F7C3DA; color: #17301F; border-radius: 18px; padding: 0 22px; min-height: 60px; display: flex; align-items: center; justify-content: space-between; font-family: Anton, sans-serif; font-size: 24px; text-transform: uppercase; letter-spacing: .01em">
+<span>Go to menu</span>
+<span style="width: 38px; height: 38px; border-radius: 50%; background: #17301F; color: #F7C3DA; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"></path></svg></span>
+</a>
+</div>
+
+<div class="oc-stats" style="display: flex; flex-direction: column; gap: 10px; width: 210px">
+<div style="background: #17301F; color: #FBF8EF; border-radius: 20px; padding: 14px 18px">
+<div style="font-family: Anton, sans-serif; font-size: 38px; line-height: 1">20 MIN</div>
+<div style="font-size: 12px; opacity: .85; margin-top: 2px">order to hand at lunch</div>
+</div>
+<div style="background: #E9F2D5; color: #17301F; border-radius: 20px; padding: 14px 18px">
+<div style="font-family: Anton, sans-serif; font-size: 38px; line-height: 1">5 MIN</div>
+<div style="font-size: 12px; font-weight: 600; margin-top: 2px">walk from St Leonards Station</div>
+</div>
+</div>
+</div>
+</div><section id="story" style="position: relative; z-index: 5; padding: 0 clamp(16px, 4vw, 48px) clamp(44px, 5vw, 64px)">
+<div style="max-width: 1240px; margin: 0 auto; position: relative">
+
+
+
+</div>
+</section><div style="overflow: hidden; background: #17301F; color: #F6F4EC; padding: 14px 0">
+<div class="oc-marquee" style="display: flex; width: max-content; gap: 40px; font-family: Anton, sans-serif; font-size: 24px; text-transform: uppercase; white-space: nowrap">
+<span>Phở</span><span style="color: #F7C3DA">✿</span><span>Bánh mì</span><span style="color: #F7C3DA">✿</span><span>Cà phê sữa đá</span><span style="color: #F7C3DA">✿</span><span>Orchid Benny</span><span style="color: #F7C3DA">✿</span><span>Back at your desk on time</span><span style="color: #F7C3DA">✿</span>
+<span>Phở</span><span style="color: #F7C3DA">✿</span><span>Bánh mì</span><span style="color: #F7C3DA">✿</span><span>Cà phê sữa đá</span><span style="color: #F7C3DA">✿</span><span>Orchid Benny</span><span style="color: #F7C3DA">✿</span><span>Back at your desk on time</span><span style="color: #F7C3DA">✿</span>
+</div>
+</div>
+</section>
+
+<!-- ============ 2. QUOTE (compact) ============ -->
+
+
+<!-- heritage drawer -->
+<div id="oc-drawer" hidden role="dialog" aria-modal="true" aria-label="Our heritage story" style="position: fixed; inset: 0; z-index: 60; background: rgba(23,48,31,.45); display: flex; justify-content: flex-end">
+<button data-close-story aria-label="Close story" style="position: absolute; inset: 0; background: transparent; border: 0; cursor: pointer"></button>
+<aside style="position: relative; width: min(560px, 100%); height: 100%; overflow-y: auto; background: #F6F4EC; padding: clamp(28px, 4vw, 56px)">
+<button data-close-story aria-label="Close" style="width: 48px; height: 48px; border-radius: 50%; border: 0; background: #17301F; color: #F6F4EC; cursor: pointer; font-size: 22px">×</button>
+<div style="font-family: Caveat, cursive; font-size: 28px; color: #C2558A; margin-top: 28px">hoa lan · the orchid</div>
+<h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 54px; line-height: .95; margin: 8px 0 0">Resilience, <em>grace</em>, and a family table.</h3>
+<img src="assets/table.webp" alt="A shared table of dishes and coffee at Orchid Cafe" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 22px; margin-top: 28px">
+<p style="font-size: 16px; line-height: 1.65; margin-top: 24px">In Vietnamese culture the orchid stands for resilience and quiet elegance — a flower that blooms wherever it's planted. That's our story too. Our family brought the recipes we grew up with into the brunch culture we now call home.</p>
+<p style="font-size: 16px; line-height: 1.65">When we took over this St Leonards corner, we kept the name and the warmth that came with it. Same spot, same community — now with phở broth simmering from early morning, bánh mì on the grill, and phin coffee dripping slow so your lunch doesn't have to.</p>
+<p style="font-size: 13px; line-height: 1.5; background: #FFF3C4; color: #6B5300; padding: 12px 14px; border-radius: 12px">Draft copy — owners to confirm names, origin region and family details. [OWNER NAMES] · [HOMETOWN / REGION] · [YEAR ARRIVED IN SYDNEY]</p>
+</aside>
+</div>
+
+<!-- marquee -->
+<section id="story" style="position: relative; z-index: 5; padding: 0 clamp(16px, 4vw, 48px) clamp(44px, 5vw, 64px)">
+<div style="max-width: 1240px; margin: 0 auto; position: relative">
+
+<div style="display: flex; align-items: center; gap: clamp(20px, 4vw, 56px); flex-wrap: wrap">
+<h2 style="flex: 999 1 640px; min-width: 0; margin: 0; font-family: Anton, sans-serif; font-weight: 400; text-transform: uppercase; font-size: clamp(32px, 4.4vw, 64px); line-height: .98; color: #17301F"><br>We cook the food we grew up with — <span style="color: rgb(46, 107, 74)">fresh herbs, slow broth, crusty bánh mì</span> — and serve it at the pace of a Sydney workday.</h2>
+<button class="oc-btn oc-quotecta" data-open-story style="flex: 1 0 220px; max-width: 280px; border: 0; cursor: pointer; background: #17301F; color: #FBF8EF; border-radius: 24px; padding: 20px 22px; text-align: left; font-family: inherit; display: flex; flex-direction: column; gap: 14px">
+<span style="font-family: Caveat, cursive; font-size: 22px; color: #F7C3DA; line-height: 1">our heritage</span>
+<span style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<span style="font-family: 'Instrument Serif', serif; font-size: 38px; line-height: .95">Why <em>“Orchid”?</em></span>
+<span style="flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%; background: #F7C3DA; color: #17301F; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+</span>
+</button>
+</div>
+<div style="margin-top: 22px; font-family: Caveat, cursive; font-size: 28px; color: #17301F">— the Orchid family</div>
+</div>
+</section><div style="overflow: hidden; background: #17301F; color: #F6F4EC; padding: 14px 0">
+<div class="oc-marquee" style="display: flex; width: max-content; gap: 40px; font-family: Anton, sans-serif; font-size: 24px; text-transform: uppercase; white-space: nowrap">
+<span>Phở</span><span style="color: #F7C3DA">✿</span><span>Bánh mì</span><span style="color: #F7C3DA">✿</span><span>Cà phê sữa đá</span><span style="color: #F7C3DA">✿</span><span>Orchid Benny</span><span style="color: #F7C3DA">✿</span><span>Back at your desk on time</span><span style="color: #F7C3DA">✿</span>
+<span>Phở</span><span style="color: #F7C3DA">✿</span><span>Bánh mì</span><span style="color: #F7C3DA">✿</span><span>Cà phê sữa đá</span><span style="color: #F7C3DA">✿</span><span>Orchid Benny</span><span style="color: #F7C3DA">✿</span><span>Back at your desk on time</span><span style="color: #F7C3DA">✿</span>
+</div>
+</div>
+
+<!-- ============ 3. SPECIALS (bento postcards) ============ -->
+<section id="menu" style="padding: clamp(44px, 6vw, 80px) clamp(16px, 3vw, 40px) clamp(40px, 5vw, 64px)">
+<div style="max-width: 1320px; margin: 0 auto">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 22px">
+<div>
+<div style="font-family: Caveat, cursive; font-size: 26px; color: #C2558A">postcards from the kitchen</div>
+<h2 style="margin: 2px 0 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(52px, 7vw, 104px); line-height: .9; letter-spacing: -.03em">Specials</h2>
+</div>
+<a class="oc-btn oc-cta" href="https://orchidcafe.net/menu" style="text-decoration: none; background: #17301F; color: #FBF8EF; border-radius: 18px; padding: 0 12px 0 24px; min-height: 60px; display: inline-flex; align-items: center; gap: 16px; font-family: Anton, sans-serif; font-size: 22px; text-transform: uppercase">
+View full menu
+<span style="width: 40px; height: 40px; border-radius: 50%; background: #F7C3DA; color: #17301F; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></span>
+</a>
+</div>
+
+<div class="oc-bento">
+
+<article class="oc-pc oc-l" style="background:#FBF8EF;border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(23,48,31,.45);outline:1px solid rgba(23,48,31,.06);min-width:0;transform:rotate(-.6deg);">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); height: 100%; min-height: 300px">
+<div style="position:relative;background:#E9F2D5;display:flex;align-items:center;justify-content:center;overflow:hidden;min-height:300px;padding:18px;"><img loading="lazy" src="assets/pho.png" alt="Bowl of beef phở" style="position:absolute;inset:8%;width:84%;height:84%;object-fit:contain;filter:drop-shadow(0 18px 22px rgba(23,48,31,.28))"></div>
+<div style="position: relative; padding: 22px 22px 20px; display: flex; flex-direction: column; gap: 8px; border-left: 1px dashed #CFC9B6">
+<div style="position: absolute; top: 14px; right: 14px; width: 46px; height: 56px; border: 2px dashed #E3A7C2; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: Anton, sans-serif; font-size: 11px; color: #C2558A; text-align: center; line-height: 1.05; padding: 3px; transform: rotate(4deg)">PHỞ</div>
+<div style="font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #2E6B4A; padding-right: 56px">Hà Nội · house special</div>
+<h3 style="margin: 4px 0 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 38px; line-height: .95; padding-right: 40px">Phở bò</h3>
+<div style="font-family: Caveat, cursive; font-size: 22px; line-height: 1.05; color: #C2558A">broth on since early morning</div>
+<p style="margin: 0; flex: 1; font-size: 14px; line-height: 1.5">Beef noodle soup with rice noodles, Thai basil, bean sprouts, lime and fresh chilli.</p>
+<div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2DDCC; padding-top: 10px">
+<span style="font-family: Anton, sans-serif; font-size: 24px">$18.50</span><span style="font-size: 12px; font-weight: 700; color: #2E6B4A">ready ~20 min</span>
+</div>
+</div>
+</div>
+</article>
+
+
+<article class="oc-pc oc-p" style="background:#FBF8EF;border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(23,48,31,.45);outline:1px solid rgba(23,48,31,.06);min-width:0;transform:rotate(.8deg);">
+<div style="display: flex; flex-direction: column; height: 100%">
+<div style="position:relative;height:0;padding-bottom:90%;background:#FFF3C4;overflow:hidden;">
+<img loading="lazy" src="assets/banhmi.png" alt="Bánh mì roll in a bamboo basket" style="position:absolute;inset:8%;width:84%;height:84%;object-fit:contain;filter:drop-shadow(0 18px 22px rgba(23,48,31,.28))">
+<div style="position: absolute; top: 12px; right: 12px; width: 40px; height: 48px; background: #FBF8EF; border: 2px dashed #E3A7C2; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: Anton, sans-serif; font-size: 10px; color: #C2558A; text-align: center; line-height: 1.05; padding: 3px; transform: rotate(4deg)">BÁNH MÌ</div>
+</div>
+<div style="padding: 16px 18px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; border-top: 1px dashed #CFC9B6">
+<h3 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 30px; line-height: .95">Bánh mì thịt</h3>
+<p style="margin: 0; flex: 1; font-size: 13px; line-height: 1.45">Crackly roll, roast pork, pâté, pickled carrot, coriander and chilli.</p>
+<div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2DDCC; padding-top: 8px">
+<span style="font-family: Anton, sans-serif; font-size: 22px">$13.50</span><span style="font-size: 12px; font-weight: 700; color: #2E6B4A">grab &amp; go</span>
+</div>
+</div>
+</div>
+</article>
+
+
+<article class="oc-pc oc-p" style="background:#FBF8EF;border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(23,48,31,.45);outline:1px solid rgba(23,48,31,.06);min-width:0;transform:rotate(-.8deg);">
+<div style="display: flex; flex-direction: column; height: 100%">
+<div style="position:relative;height:0;padding-bottom:90%;background:#FCE3EE;overflow:hidden;">
+<img loading="lazy" src="assets/wrap.png" alt="Toasted chicken wrap cut in half" style="position:absolute;inset:8%;width:84%;height:84%;object-fit:contain;filter:drop-shadow(0 18px 22px rgba(23,48,31,.28))">
+<div style="position: absolute; top: 12px; right: 12px; width: 40px; height: 48px; background: #FBF8EF; border: 2px dashed #E3A7C2; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: Anton, sans-serif; font-size: 10px; color: #C2558A; text-align: center; line-height: 1.05; padding: 3px; transform: rotate(4deg)">LUNCH</div>
+</div>
+<div style="padding: 16px 18px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; border-top: 1px dashed #CFC9B6">
+<h3 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 30px; line-height: .95">Chicken Avo Wrap</h3>
+<p style="margin: 0; flex: 1; font-size: 13px; line-height: 1.45">Roast chicken, avocado, spinach and tomato, toasted. Add chips $4.</p>
+<div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2DDCC; padding-top: 8px">
+<span style="font-family: Anton, sans-serif; font-size: 22px">$12.50</span><span style="font-size: 12px; font-weight: 700; color: #2E6B4A">desk-friendly</span>
+</div>
+</div>
+</div>
+</article>
+
+
+<article class="oc-pc oc-p" style="background:#FBF8EF;border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(23,48,31,.45);outline:1px solid rgba(23,48,31,.06);min-width:0;transform:rotate(.6deg);">
+<div style="display: flex; flex-direction: column; height: 100%">
+<div style="position:relative;height:0;padding-bottom:90%;background:#EDEADF;overflow:hidden;">
+<img loading="lazy" src="assets/coffee.webp" alt="Iced coffee" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+<div style="position: absolute; top: 12px; right: 12px; width: 40px; height: 48px; background: #FBF8EF; border: 2px dashed #E3A7C2; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: Anton, sans-serif; font-size: 10px; color: #C2558A; text-align: center; line-height: 1.05; padding: 3px; transform: rotate(4deg)">CÀ PHÊ</div>
+</div>
+<div style="padding: 16px 18px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; border-top: 1px dashed #CFC9B6">
+<h3 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 30px; line-height: .95">Cà phê sữa đá</h3>
+<p style="margin: 0; flex: 1; font-size: 13px; line-height: 1.45">Slow-dripped phin coffee over ice with sweet condensed milk.</p>
+<div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2DDCC; padding-top: 8px">
+<span style="font-family: Anton, sans-serif; font-size: 22px">$6.50</span><span style="font-size: 12px; font-weight: 700; color: #2E6B4A">iced</span>
+</div>
+</div>
+</div>
+</article>
+
+
+<article class="oc-pc oc-l" style="background:#FBF8EF;border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(23,48,31,.45);outline:1px solid rgba(23,48,31,.06);min-width:0;transform:rotate(.5deg);">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); height: 100%; min-height: 300px">
+<div style="position:relative;background:#EDEADF;display:flex;align-items:center;justify-content:center;overflow:hidden;min-height:300px;"><img loading="lazy" src="assets/benny.webp" alt="Eggs benedict on croissant" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
+<div style="position: relative; padding: 22px 22px 20px; display: flex; flex-direction: column; gap: 8px; border-left: 1px dashed #CFC9B6">
+<div style="position: absolute; top: 14px; right: 14px; width: 46px; height: 56px; border: 2px dashed #E3A7C2; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: Anton, sans-serif; font-size: 11px; color: #C2558A; text-align: center; line-height: 1.05; padding: 3px; transform: rotate(4deg)">AUS</div>
+<div style="font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #2E6B4A; padding-right: 56px">Aussie brunch · all day</div>
+<h3 style="margin: 4px 0 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 38px; line-height: .95; padding-right: 40px">Orchid Benny</h3>
+<div style="font-family: Caveat, cursive; font-size: 22px; line-height: 1.05; color: #C2558A">our brunch favourite</div>
+<p style="margin: 0; flex: 1; font-size: 14px; line-height: 1.5">Two poached eggs on toasted croissant, sautéed spinach and house Orchid hollandaise.</p>
+<div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2DDCC; padding-top: 10px">
+<span style="font-family: Anton, sans-serif; font-size: 24px">$15.50</span><span style="font-size: 12px; font-weight: 700; color: #2E6B4A">breakfast all day</span>
+</div>
+</div>
+</div>
+</article>
+
+
+<article class="oc-pc oc-p" style="background:#FBF8EF;border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(23,48,31,.45);outline:1px solid rgba(23,48,31,.06);min-width:0;transform:rotate(-.6deg);">
+<div style="display: flex; flex-direction: column; height: 100%">
+<div style="position:relative;height:0;padding-bottom:90%;background:#EDEADF;overflow:hidden;">
+<img loading="lazy" src="assets/brunch.webp" alt="Brunch plate" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+<div style="position: absolute; top: 12px; right: 12px; width: 40px; height: 48px; background: #FBF8EF; border: 2px dashed #E3A7C2; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: Anton, sans-serif; font-size: 10px; color: #C2558A; text-align: center; line-height: 1.05; padding: 3px; transform: rotate(4deg)">BRUNCH</div>
+</div>
+<div style="padding: 16px 18px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; border-top: 1px dashed #CFC9B6">
+<h3 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 30px; line-height: .95">Big Breakfast</h3>
+<p style="margin: 0; flex: 1; font-size: 13px; line-height: 1.45">Bacon, eggs your way, mushroom, beans, avocado, hash browns and sourdough.</p>
+<div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2DDCC; padding-top: 8px">
+<span style="font-family: Anton, sans-serif; font-size: 22px">$26.00</span><span style="font-size: 12px; font-weight: 700; color: #2E6B4A">weekend fuel</span>
+</div>
+</div>
+</div>
+</article>
+
+</div>
+<p style="margin: 14px 0 0; font-size: 12px; color: #6B6A60">Vietnamese dish prices are samples — to be confirmed by Orchid Cafe.</p>
+</div>
+</section>
+
+<!-- ============ 4. PROMO (compact ticket) ============ -->
+<section style="padding: 0 clamp(16px, 3vw, 40px) clamp(44px, 5vw, 64px)">
+<div style="max-width: 1320px; margin: 0 auto; background: #EDEADF; border-radius: 28px; padding: clamp(22px, 3vw, 36px); display: flex; align-items: center; gap: clamp(20px, 3vw, 44px); flex-wrap: wrap">
+<div style="flex: 1 1 260px; min-width: 0">
+<div style="font-family: Caveat, cursive; font-size: 26px; color: #C2558A">first time here?</div>
+<h2 style="margin: 2px 0 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(36px, 3.6vw, 54px); line-height: .95; letter-spacing: -.02em">Your ticket to Vietnam is <em>five minutes away.</em></h2>
+<p style="margin: 12px 0 0; font-size: 14px; line-height: 1.5">Tear the stub to claim your welcome offer.</p>
+</div>
+
+<div id="oc-ticket" class="oc-jitter" style="flex: 2 1 560px; min-width: 0; display: flex; align-items: stretch; perspective: 1600px">
+<div style="position: relative; flex: 1 1 auto; min-width: 0; min-height: 210px">
+<div class="oc-flip" id="oc-flip" style="position:relative;width:100%;height:100%;min-height:210px;transform-style:preserve-3d">
+<div style="position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: #FBF8EF; border-radius: 20px; display: flex; overflow: hidden; box-shadow: 0 24px 50px -30px rgba(23,48,31,.45)">
+<div style="width: 44px; background: #17301F; color: #F6F4EC; display: flex; align-items: center; justify-content: center">
+<span style="writing-mode: vertical-rl; transform: rotate(180deg); font-size: 10px; font-weight: 800; letter-spacing: .28em">BOARDING PASS</span>
+</div>
+<div style="flex: 1; padding: 18px 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; min-width: 0">
+<div style="display: flex; justify-content: space-between; gap: 8px; font-size: 10px; font-weight: 800; letter-spacing: .14em; color: #6B6A60; text-transform: uppercase; flex-wrap: wrap">
+<span>Passenger · Hungry office worker</span><span>Orchid Air · OC 038</span>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+<div><div style="font-family: Anton, sans-serif; font-size: clamp(38px, 4.4vw, 58px); line-height: 1">SYD</div><div style="font-size: 11px; font-weight: 600">St Leonards Stn</div></div>
+<svg width="100" height="26" viewBox="0 0 120 30" fill="none" stroke="#C2558A" stroke-width="2" stroke-linecap="round" style="flex-shrink: 1; min-width: 40px"><path d="M2 15h100" stroke-dasharray="4 6"></path><path d="M100 6l14 9-14 9"></path></svg>
+<div style="text-align: right"><div style="font-family: Anton, sans-serif; font-size: clamp(38px, 4.4vw, 58px); line-height: 1; color: #2E6B4A">SGN</div><div style="font-size: 11px; font-weight: 600">38 Atchison St</div></div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; font-size: 10px; border-top: 1px dashed #CFC9B6; padding-top: 10px">
+<div><div style="color: #6B6A60; font-weight: 700; letter-spacing: .12em">FLIGHT</div><div style="font-weight: 800; font-size: 13px">5 min walk</div></div>
+<div><div style="color: #6B6A60; font-weight: 700; letter-spacing: .12em">GATE</div><div style="font-weight: 800; font-size: 13px">Atchison St</div></div>
+<div><div style="color: #6B6A60; font-weight: 700; letter-spacing: .12em">SEAT</div><div style="font-weight: 800; font-size: 13px">Window</div></div>
+</div>
+</div>
+</div>
+<div style="position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: rotateY(180deg); background: #17301F; color: #F6F4EC; border-radius: 20px; padding: 22px 26px; display: flex; flex-direction: column; justify-content: center; gap: 8px; overflow: hidden">
+<div style="font-family: Caveat, cursive; font-size: 26px; color: #F7C3DA">chào mừng · welcome to Orchid Cafe</div>
+<div style="font-family: Anton, sans-serif; font-size: clamp(26px, 3vw, 40px); line-height: 1; text-transform: uppercase; padding-right: 70px">Your first coffee's on us —<br><span style="color: #C9E68A">or 15% off your meal.</span></div>
+<p style="margin: 0; font-size: 13px; line-height: 1.45; opacity: .85">Show this pass at the counter on your first visit. [Terms / expiry to confirm]</p>
+<div style="position: absolute; right: 18px; top: 16px; width: 76px; height: 76px; border: 3px solid #F7C3DA; border-radius: 50%; display: flex; align-items: center; justify-content: center; transform: rotate(-14deg); font-family: Anton, sans-serif; font-size: 12px; color: #F7C3DA; text-align: center; line-height: 1.05">ARRIVED<br>ORCHID</div>
+</div>
+</div>
+</div>
+<button class="oc-stub" id="oc-stub" type="button" aria-label="Tear the ticket stub to reveal your welcome offer" style="flex:0 0 130px;min-height:210px;background:#FBF8EF;border:0;border-left:3px dashed #CFC9B6;border-radius:20px;padding:16px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;box-shadow:0 24px 50px -30px rgba(23,48,31,.45)">
+<div style="font-size: 10px; font-weight: 800; letter-spacing: .2em; color: #6B6A60">BOARDING</div>
+<div style="font-family: Caveat, cursive; font-size: 30px; line-height: 1; color: #C2558A; margin: 8px 0">click me</div>
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#17301F" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>
+<div style="margin-top: 10px; height: 30px; width: 100%; background: repeating-linear-gradient(90deg, #17301F 0 2px, transparent 2px 4px, #17301F 4px 7px, transparent 7px 9px)"></div>
+</button>
+</div>
+<button id="oc-reset" type="button" hidden style="background: transparent; border: 0; font-weight: 700; color: #2E6B4A; cursor: pointer; text-decoration: underline; min-height: 44px; font-family: inherit; font-size: 13px">Reset ticket</button>
+</div>
+</section>
+
+<!-- ============ 5. LOCATION ============ -->
+<section id="visit" style="padding: 0 clamp(16px, 3vw, 40px) clamp(44px, 5vw, 64px)">
+<div style="max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; align-items: stretch">
+
+<div style="min-width: 0; background: #FFFFFF; border-radius: 28px; padding: clamp(22px, 3vw, 36px); display: flex; flex-direction: column; gap: 18px">
+<div>
+<div style="font-family: Caveat, cursive; font-size: 26px; color: #C2558A">wish you were here</div>
+<h2 style="margin: 2px 0 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(48px, 5.4vw, 80px); line-height: .88; letter-spacing: -.03em">Come hungry, <em style="color: #2E6B4A">stay a while.</em></h2>
+</div>
+<div style="background: #F6F4EC; border-radius: 20px; padding: 14px">
+<svg viewBox="0 0 520 260" style="width: 100%; height: auto; display: block" role="img" aria-label="Illustrative walking route from St Leonards Station to 38 Atchison St, about 5 minutes">
+<rect x="0" y="0" width="520" height="260" rx="14" fill="#ECE9DD"></rect>
+<path d="M-10 60 L530 34" stroke="#FFFFFF" stroke-width="24"></path>
+<path d="M120 -10 L150 270" stroke="#FFFFFF" stroke-width="14"></path>
+<path d="M-10 186 L530 168" stroke="#FFFFFF" stroke-width="14"></path>
+<path d="M360 -10 L380 270" stroke="#FFFFFF" stroke-width="14"></path>
+<text x="16" y="50" font-family="Manrope" font-size="11" font-weight="700" fill="#6B6A60">PACIFIC HWY</text>
+<text x="16" y="176" font-family="Manrope" font-size="11" font-weight="700" fill="#6B6A60">ATCHISON ST</text>
+<path class="oc-route" d="M110 56 C 130 96, 140 140, 180 176 S 300 174, 340 172" fill="none" stroke="#C2558A" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10"></path>
+<rect x="74" y="32" width="76" height="32" rx="10" fill="#17301F"></rect>
+<text x="112" y="53" text-anchor="middle" font-family="Manrope" font-size="12" font-weight="800" fill="#F6F4EC">STATION</text>
+<circle cx="340" cy="172" r="18" fill="#F7C3DA"></circle>
+<circle cx="340" cy="172" r="7" fill="#17301F"></circle>
+<text x="340" y="212" text-anchor="middle" font-family="Manrope" font-size="12" font-weight="800" fill="#17301F">ORCHID · 38 ATCHISON</text>
+<rect x="208" y="96" width="96" height="30" rx="15" fill="#C9E68A"></rect>
+<text x="256" y="116" text-anchor="middle" font-family="Manrope" font-size="12" font-weight="800" fill="#17301F">~5 MIN WALK</text>
+</svg>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 6px">
+<span style="font-size: 11px; color: #6B6A60">Illustrative map — not to scale</span>
+<a href="https://www.google.com/maps/dir/St+Leonards+Station/38+Atchison+St,+St+Leonards+NSW+2065/data=!4m2!4m1!3e2" style="font-weight: 800; font-size: 14px; min-height: 44px; display: inline-flex; align-items: center">Get walking directions →</a>
+</div>
+</div>
+</div>
+
+<div style="position: relative; border-radius: 28px; overflow: hidden; min-height: 460px; padding: clamp(16px, 3vw, 32px); display: flex; align-items: center; justify-content: center">
+<img src="assets/terrace.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+<div style="position: relative; width: 100%; max-width: 560px; background: #FBF8EF; border-radius: 8px; padding: clamp(18px, 3vw, 28px); box-shadow: 0 40px 80px -30px rgba(10,30,10,.6); transform: rotate(-1.5deg); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 12px; min-width: 0">
+<div style="font-family: Caveat, cursive; font-size: 30px; line-height: 1.05">Greetings from<br>St Leonards!</div>
+<div style="font-size: 10px; font-weight: 800; letter-spacing: .16em; color: #6B6A60">HOURS · 7:30AM – 2:30PM</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+<button type="button" class="oc-day" data-day="Mon" data-open="1" aria-pressed="false">Mon</button><button type="button" class="oc-day" data-day="Tue" data-open="1" aria-pressed="false">Tue</button><button type="button" class="oc-day oc-closed" data-day="Wed" data-open="0" aria-pressed="false">Wed</button><button type="button" class="oc-day oc-closed" data-day="Thu" data-open="0" aria-pressed="false">Thu</button><button type="button" class="oc-day" data-day="Fri" data-open="1" aria-pressed="false">Fri</button><button type="button" class="oc-day" data-day="Sat" data-open="1" aria-pressed="false">Sat</button><button type="button" class="oc-day oc-closed" data-day="Sun" data-open="0" aria-pressed="false">Sun</button>
+</div>
+<div style="font-size: 14px; font-weight: 600; background: #FFFFFF; border-radius: 10px; padding: 10px 12px; min-height: 44px" id="oc-daymsg" aria-live="polite">Tap a day to check our hours.</div>
+</div>
+<div style="border-left: 1px dashed #CFC9B6; padding-left: 20px; display: flex; flex-direction: column; gap: 12px; min-width: 0">
+<div style="align-self: flex-end; width: 60px; height: 72px; border: 2px dashed #E3A7C2; border-radius: 4px; overflow: hidden">
+<img src="assets/benny.webp" alt="" style="width: 100%; height: 100%; object-fit: cover">
+</div>
+<div style="border-bottom: 1px solid #CFC9B6; padding-bottom: 6px"><div style="font-size: 10px; font-weight: 800; letter-spacing: .14em; color: #6B6A60">TO</div><div style="font-family: Anton, sans-serif; font-size: 24px; line-height: 1.05">38 ATCHISON ST</div></div>
+<div style="border-bottom: 1px solid #CFC9B6; padding-bottom: 6px; font-size: 14px; font-weight: 600">St Leonards NSW 2065</div>
+<div style="border-bottom: 1px solid #CFC9B6; padding-bottom: 6px; font-size: 14px"><a href="tel:0423245052" style="font-weight: 700">0423 245 052</a></div>
+<div style="font-size: 14px"><a href="mailto:Info@orchidcafe.net" style="font-weight: 700">Info@orchidcafe.net</a></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============ 6. END (edge-to-edge, mirrors hero) ============ -->
+<footer style="padding: 0 6px 6px">
+<div style="position: relative; border-radius: 28px; overflow: hidden; background: #2E6B4A; color: #F6F4EC">
+<img src="assets/terrace.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+<div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(16,40,22,.78), rgba(16,40,22,.4) 60%, rgba(16,40,22,.72))"></div>
+<div style="position: relative; padding: clamp(28px, 4vw, 56px) clamp(18px, 3vw, 44px) 0">
+<div style="display: flex; justify-content: space-between; gap: 28px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; gap: 18px; max-width: 380px">
+<div style="font-family: Anton, sans-serif; font-size: clamp(30px, 3.4vw, 46px); line-height: .95; text-transform: uppercase; color: #F7C3DA">Where orchids<br>meet flavour.</div>
+<a class="oc-btn oc-cta" href="#menu" style="text-decoration: none; align-self: flex-start; background: #F7C3DA; color: #17301F; border-radius: 16px; padding: 0 20px; min-height: 52px; display: inline-flex; align-items: center; gap: 12px; font-family: Anton, sans-serif; font-size: 20px; text-transform: uppercase">Go to menu ↑</a>
+</div>
+<div style="display: flex; gap: clamp(28px, 5vw, 72px); flex-wrap: wrap; font-size: 14px; line-height: 2">
+<div><div style="font-size: 11px; font-weight: 800; letter-spacing: .16em; opacity: .75">EXPLORE</div><a href="#menu" style="color: #F6F4EC; display: block">Menu</a><a href="#top" style="color: #F6F4EC; display: block">Catering</a><a href="#story" style="color: #F6F4EC; display: block">Our story</a></div>
+<div><div style="font-size: 11px; font-weight: 800; letter-spacing: .16em; opacity: .75">VISIT</div><div>38 Atchison St</div><div>St Leonards NSW 2065</div><div>Mon, Tue, Fri, Sat · 7:30am – 2:30pm</div><div>Closed Wed, Thu, Sun</div></div>
+<div><div style="font-size: 11px; font-weight: 800; letter-spacing: .16em; opacity: .75">SAY HELLO</div><a href="tel:0423245052" style="color: #F6F4EC; display: block">0423 245 052</a><a href="mailto:Info@orchidcafe.net" style="color: #F6F4EC; display: block">Info@orchidcafe.net</a><a href="https://orchidcafe.net" style="color: #F6F4EC; display: block">orchidcafe.net</a></div>
+</div>
+</div>
+<div style="font-family: 'Instrument Serif', serif; font-size: clamp(110px, 25vw, 380px); line-height: .78; letter-spacing: -.05em; text-align: center; margin-top: 32px; color: #FBF8EF">orchid<span style="color: #F7C3DA">.</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 11px; font-weight: 700; letter-spacing: .14em; padding: 18px 0 20px; border-top: 1px solid rgba(246,244,236,.25); margin-top: 18px">
+<span>© 2026 ORCHID CAFE</span><span>BẾP NHÀ VIỆT · ST LEONARDS, SYDNEY</span>
+</div>
+</div>
+</div>
+</footer>
+
+</div>
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script src="js/vendor/lenis.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
