@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orchid Cafe — St Leonards</title>
+<meta name="description" content="Orchid Cafe, St Leonards. Australian breakfast & brunch infused with Vietnamese soul. 38 Atchison St, St Leonards NSW 2065.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Caveat:wght@600;700&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/pho.webp">
+<style>
+/* ======================================================
+   SYSTEM — cut-paper collage + one ink pen
+   paper 60 · pink 30 · green 10 · butter = tape only
+   ====================================================== */
+:root{
+  --paper:#FBF6EE; --white:#FFFEFB; --ink:#22302A; --ink-2:#55605A;
+  --pink:#EC5F8F; --pink-l:#F9CAD8; --green:#2F7A4A; --butter:#FFE07A;
+  --brush:'Caveat Brush',cursive; --note:'Caveat',cursive;
+  --serif:'Instrument Serif',Georgia,serif; --sans:'Inter Tight',system-ui,sans-serif;
+  --gut:clamp(16px,4vw,56px); --pen:1.8px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:clip}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;overflow-x:clip}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+:focus-visible{outline:2px dashed var(--pink);outline-offset:5px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+section,footer.end{position:relative;overflow:clip}
+.wrap{max-width:1240px;margin:0 auto;padding:0 var(--gut)}
+
+/* type scale */
+.eyebrow{font-family:var(--sans);font-weight:600;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase}
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(3rem,7vw,6.2rem);line-height:.92;letter-spacing:-.01em;margin:0}
+.h2 em{font-style:italic;color:var(--pink)}
+.annot{font-family:var(--note);font-weight:600;font-size:clamp(1.2rem,1.6vw,1.45rem);line-height:1.1}
+
+/* one pen: every line is the same weight */
+.draw path,.draw circle,.draw ellipse,.sym path,.sym circle,.sym ellipse{fill:none;stroke:currentColor;stroke-width:var(--pen);stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.draw.thick path{stroke-width:2.6px}
+
+/* cut-paper shapes (svg injected by JS behind content) */
+.cut{position:relative;isolation:isolate}
+.cut > svg.cutbg{position:absolute;left:0;top:0;z-index:-1;overflow:visible;pointer-events:none}
+
+#grain{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:60;mix-blend-mode:multiply;opacity:.2}
+
+/* buttons: cut-paper pills */
+.pill{display:inline-flex;align-items:center;gap:.5em;min-height:48px;padding:.6em 1.5em;font-family:var(--sans);font-weight:600;font-size:1rem;text-decoration:none;color:var(--ink);transition:transform .3s cubic-bezier(.3,1.5,.5,1)}
+.pill:hover{transform:rotate(-2deg) scale(1.04)}
+.pill svg.arr{width:1em;height:1em}
+.pill.line{padding:.6em 1.2em}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px var(--gut);transition:background .35s}
+.nav.solid{background:rgba(251,246,238,.94);backdrop-filter:blur(6px)}
+.logo{display:flex;align-items:center;gap:8px;font-family:var(--brush);font-size:1.6rem;text-decoration:none;line-height:1}
+.logo svg{width:30px;height:30px;color:var(--pink)}
+.nav ul{display:flex;gap:clamp(14px,2.6vw,36px);list-style:none;margin:0;padding:0;align-items:center}
+.nav li a,.nav li button{font-family:var(--sans);font-weight:600;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:12px 2px;background-image:linear-gradient(var(--pink),var(--pink));background-size:0 2px;background-repeat:no-repeat;background-position:0 80%;transition:background-size .3s}
+.nav li a:hover,.nav li button:hover{background-size:100% 2px}
+@media (max-width:720px){.nav .hide-m{display:none}}
+
+/* ============ HERO ============ */
+.hero{--D:min(50vw,40svh,520px);min-height:max(100svh,700px);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:clamp(84px,11vh,120px) var(--gut) 64px}
+.field{position:absolute;inset:0;pointer-events:none;z-index:0}
+.field svg{position:absolute;overflow:visible}
+.hmeta{position:relative;z-index:5;width:100%;max-width:1200px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.hmeta.top .rule{flex:1;height:1px;background:var(--ink);opacity:.5}
+.hmeta.bottom{border-top:1px solid var(--ink);padding-top:14px;align-items:flex-start}
+.hmeta.bottom p{margin:0;flex:1;font-size:clamp(.82rem,1.1vw,.95rem)}
+.hmeta.bottom p:nth-child(2){text-align:center}.hmeta.bottom p:last-child{text-align:right}
+.hmeta.bottom b{display:block;font-family:var(--serif);font-weight:400;font-size:1.7em;line-height:1.05}
+.stage{position:relative;width:100%;display:flex;justify-content:center;margin:clamp(10px,2vh,24px) 0}
+.stage h1{display:grid;justify-items:center;row-gap:calc(var(--D)*.8);margin:0;font-family:var(--brush);font-weight:400;font-size:clamp(4.4rem,17vw,15.5rem);line-height:.78}
+.stage h1 span{display:block;position:relative;pointer-events:none}
+.stage h1 .t1{z-index:1}
+.stage h1 .t2{z-index:4;color:var(--pink)}
+.stage h1 .ch{display:inline-block}
+.sun{position:absolute;z-index:0;left:50%;top:50%;width:calc(var(--D)*1.36);height:calc(var(--D)*1.36);margin:calc(var(--D)*-.68) 0 0 calc(var(--D)*-.68);pointer-events:none}
+.sun svg{width:100%;height:100%;overflow:visible}
+.bowl{position:absolute;z-index:3;left:50%;top:50%;width:var(--D);height:var(--D);margin:calc(var(--D)/-2) 0 0 calc(var(--D)/-2);container-type:inline-size;border-radius:50%;filter:drop-shadow(0 18px 24px rgba(34,48,42,.22))}
+.bowl .under{position:absolute;inset:0;border-radius:50%;background:var(--green);color:var(--white);overflow:hidden}
+.bowl .under ul{list-style:none;margin:0;padding:0;position:absolute;inset:0}
+.bowl .under li{position:absolute;left:50%;transform:translateX(-50%) rotate(var(--r,-3deg));font-family:var(--serif);font-style:italic;font-size:8.4cqw;line-height:1;white-space:nowrap}
+.bowl .under li.sm{font-family:var(--sans);font-style:normal;font-weight:600;font-size:2.8cqw;letter-spacing:.16em;text-transform:uppercase;color:var(--pink-l)}
+.bowl canvas{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;touch-action:pan-y;cursor:none}
+.bowl .cur{position:absolute;left:0;top:0;width:13cqw;height:13cqw;margin:-6.5cqw 0 0 -6.5cqw;pointer-events:none;color:var(--white);opacity:0;transition:opacity .25s}
+.bowl .cur svg{width:100%;height:100%;overflow:visible}
+.note-l{position:absolute;z-index:5;left:0;top:36%;transform:rotate(-4deg);max-width:15ch}
+.note-l svg{display:block;width:110px;height:60px;margin:6px 0 0 40px;color:var(--ink)}
+.peek{position:absolute;z-index:5;right:0;top:50%;margin-top:-24px;transform:rotate(3deg)}
+.hand-dood{position:absolute;z-index:2;color:var(--ink);pointer-events:none}
+@media (max-width:860px){
+  .hero{--D:min(64vw,36svh)}
+  .stage{margin-bottom:80px}
+  .stage h1{font-size:clamp(4.4rem,22vw,8rem);row-gap:calc(var(--D)*.95)}
+  .note-l,.hand-dood{display:none}
+  .peek{right:50%;top:auto;bottom:-74px;margin:0;transform:translateX(50%) rotate(-2deg)}
+  .hmeta.top{font-size:.66rem}
+  .hmeta.bottom p{font-size:.78rem}
+}
+
+/* marquee (cut-paper band) */
+.marquee{position:relative;z-index:6;margin:-22px -30px;padding:16px 0;white-space:nowrap;overflow:visible;transform:rotate(-1.4deg)}
+.marquee.b2{transform:rotate(1.2deg)}
+.marquee .clip{overflow:hidden}
+.marquee .track{display:inline-flex;gap:30px;align-items:center;animation:mq 50s linear infinite;font-family:var(--serif);font-style:italic;font-size:clamp(1.6rem,3.2vw,2.5rem);line-height:1.1}
+.marquee.b2 .track{animation-direction:reverse;animation-duration:44s}
+.marquee .track svg{width:1em;height:1em;flex:none}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ============ QUOTE ============ */
+.quote{padding:clamp(100px,13vw,180px) 0 clamp(80px,10vw,140px)}
+.qcard{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,4vw,64px);align-items:center;padding:clamp(32px,5vw,76px)}
+.qcard .art svg{width:100%;height:auto;overflow:visible;color:var(--ink)}
+.qcard blockquote{margin:0}
+.qcard .qm{display:block;font-family:var(--serif);font-size:clamp(5rem,9vw,8rem);line-height:.5;height:.42em;color:var(--white)}
+.qcard p.q{margin:0;font-family:var(--serif);font-size:clamp(1.9rem,3.6vw,3.3rem);line-height:1.06;letter-spacing:-.01em}
+.qcard p.q .hl{position:relative;font-style:italic;white-space:nowrap;color:var(--white)}
+.qcard p.q .hl svg{position:absolute;inset:-.2em -.28em;width:calc(100% + .56em);height:calc(100% + .4em);overflow:visible;color:var(--green)}
+.qcard footer{margin-top:28px}
+@media (max-width:820px){.qcard{grid-template-columns:1fr}.qcard .art{max-width:360px;margin:0 auto}}
+
+/* ============ MENU ============ */
+.menu{padding:clamp(90px,11vw,150px) 0 clamp(90px,11vw,150px)}
+.menu-head{position:relative;z-index:3;text-align:center;display:flex;flex-direction:column;align-items:center}
+.menu-head .h2{margin-top:22px}
+.menu-head p{margin:12px 0 0;color:var(--ink-2)}
+.stamp{position:relative;display:inline-grid;place-items:center;width:clamp(170px,19vw,220px);aspect-ratio:1;text-decoration:none;color:var(--ink);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.stamp:hover{transform:scale(1.06) rotate(-6deg)}
+.stamp > svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.stamp .ringtxt{animation:spin 16s linear infinite}
+.stamp .ringtxt text{font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.24em;fill:var(--ink);text-transform:uppercase}
+.stamp .core{position:relative;font-family:var(--serif);font-size:clamp(2rem,2.8vw,2.6rem);line-height:.9;text-align:center}
+.stamp .core small{display:block;font-family:var(--sans);font-weight:600;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.stamp .core svg{display:block;width:30px;height:30px;margin:6px auto 0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.cloth{position:relative;margin:clamp(40px,6vw,80px) clamp(10px,3vw,40px) 0;padding:clamp(50px,7vw,100px) 0}
+.dishes{position:relative;max-width:1240px;margin:0 auto;padding:0 var(--gut);display:flex;flex-direction:column;gap:clamp(40px,6vw,90px)}
+.dish{display:flex;align-items:center;gap:clamp(18px,4vw,60px);margin-left:var(--x)}
+.dish[data-side="right"]{flex-direction:row-reverse;margin-left:auto;margin-right:var(--x)}
+.pwrap{position:relative;width:clamp(260px,36vw,460px);flex:none}
+.plate{position:relative;aspect-ratio:1;border-radius:50%;filter:drop-shadow(0 14px 18px rgba(34,48,42,.2))}
+.plate .rim{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.plate .photo{position:absolute;inset:12%;border-radius:50%;overflow:hidden}
+.plate .photo img{width:100%;height:100%;object-fit:cover}
+.plate .label{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.plate .label text{font-family:var(--sans);font-weight:600;font-size:3.6px;letter-spacing:.22em;text-transform:uppercase;fill:var(--ink)}
+.hand{position:absolute;top:var(--hy,30%);width:92%;z-index:3;pointer-events:none}
+.dish[data-side="left"] .hand{right:80%}
+.dish[data-side="right"] .hand{left:80%}
+.hand .hin{transform:rotate(var(--hr,0deg));transform-origin:100% 50%}
+.dish[data-side="right"] .hand .hin{transform:scaleX(-1) rotate(var(--hr,0deg));transform-origin:50% 50%}
+.hand svg{width:100%;height:auto;overflow:visible;display:block}
+.docket{position:relative;width:clamp(230px,24vw,290px);padding:24px 24px 36px;transform:rotate(var(--rot));transition:transform .4s cubic-bezier(.3,1.5,.5,1)}
+.docket:hover{transform:rotate(0) scale(1.03)}
+.docket .no{font-family:var(--sans);font-weight:600;font-size:.72rem;letter-spacing:.18em;color:var(--pink)}
+.docket h3{margin:8px 0 0;font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,2.5vw,2.3rem);line-height:.98}
+.docket .pr{margin:8px 0 0;font-family:var(--serif);font-style:italic;font-size:1.8rem;line-height:1;color:var(--green)}
+.docket .ds{margin:10px 0 0;font-size:.92rem;color:var(--ink-2);line-height:1.45}
+@media (max-width:760px){
+  .dish,.dish[data-side="right"]{flex-direction:column;margin:0 auto}
+  .pwrap{width:76vw}
+  .docket{margin-top:-28px;z-index:4}
+}
+
+/* full menu dialog */
+dialog.full{width:min(1100px,100vw);max-width:100vw;max-height:100dvh;height:100dvh;margin:0 auto;padding:0;border:0;background:var(--paper);color:var(--ink);overflow:auto}
+dialog.full::backdrop{background:rgba(34,48,42,.5)}
+@media (min-width:900px){dialog.full{height:auto;max-height:92dvh;margin-top:4dvh;border-radius:6px}}
+.full .in{padding:clamp(24px,5vw,64px)}
+.full header{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.full .x{width:52px;height:52px;flex:none}.full .x svg{width:100%;height:100%}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,5vw,72px);margin-top:28px}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+.cols h3{font-family:var(--serif);font-weight:400;font-size:2.4rem;margin:0;line-height:1}
+.cols h3 small{display:block;margin-top:6px;font-family:var(--sans);font-weight:600;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pink)}
+.cols ul{list-style:none;padding:0;margin:14px 0 0}
+.cols li{padding:12px 0;border-bottom:1px dashed rgba(34,48,42,.3)}
+.cols .row{display:flex;gap:10px;align-items:baseline;font-weight:600}
+.cols .row .dots{flex:1;border-bottom:1.5px dotted rgba(34,48,42,.4);transform:translateY(-4px)}
+.cols .row .pr{font-family:var(--serif);font-style:italic;font-size:1.3rem;font-weight:400}
+.cols li p{margin:3px 0 0;font-size:.92rem;color:var(--ink-2)}
+.floatmenu{position:fixed;z-index:55;left:50%;bottom:20px;transform:translate(-50%,160%);transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
+.floatmenu.on{transform:translate(-50%,0)}
+
+/* ============ REVIEWS ============ */
+.reviews{padding:clamp(90px,11vw,150px) 0 clamp(70px,9vw,120px)}
+.rv-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px}
+.score{position:relative;text-align:center;padding:14px 30px}
+.score .n{font-family:var(--serif);font-size:clamp(3.6rem,7vw,5.6rem);line-height:.9}
+.score svg{position:absolute;inset:-6px -12px;width:calc(100% + 24px);height:calc(100% + 12px);overflow:visible;color:var(--pink)}
+.notes-wrap{position:relative;margin-top:20px}
+.notes{overflow:hidden;padding:46px 0;touch-action:pan-y}
+.rtrack{display:flex;gap:clamp(20px,2.6vw,34px);width:max-content;will-change:transform;padding-left:var(--gut)}
+.rv{flex:0 0 clamp(270px,28vw,350px);position:relative;margin:0;padding:34px 28px 26px;transform:rotate(var(--rot,0deg))}
+.rv::before{content:"";position:absolute;top:-12px;left:50%;width:84px;height:24px;margin-left:-42px;background:rgba(255,224,122,.85);transform:rotate(-3deg);z-index:2}
+.rv .st{color:var(--pink);font-size:1.1rem;letter-spacing:.14em}
+.rv p{margin:10px 0 18px;font-family:var(--serif);font-size:1.22rem;line-height:1.3}
+.rv figcaption{font-family:var(--sans);font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+.rv figcaption small{display:block;font-weight:500;letter-spacing:.04em;text-transform:none;color:var(--ink-2);margin-top:2px}
+.edge{position:absolute;top:50%;z-index:3;width:54px;height:54px;margin-top:-27px;display:grid;place-items:center;opacity:0;transition:opacity .3s;pointer-events:none}
+.edge svg{width:22px;height:22px}
+.edge.l{left:14px}.edge.r{right:14px}.edge.on{opacity:1}
+.rv-src{font-size:.82rem;color:var(--ink-2);padding:0 var(--gut);margin:0}
+
+/* ============ HOURS ============ */
+.hours{padding:clamp(80px,10vw,140px) var(--gut)}
+.hgrid{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(18px,2.4vw,32px)}
+@media (max-width:860px){.hgrid{grid-template-columns:1fr}}
+.h-art{padding:clamp(40px,5vw,72px);display:flex;flex-direction:column;justify-content:space-between;gap:24px;min-height:min(80vh,680px)}
+.h-art .big{margin:0;font-family:var(--serif);font-style:italic;font-size:clamp(3.6rem,8vw,6.8rem);line-height:.86}
+.h-art svg{width:min(100%,420px);height:auto;align-self:center;overflow:visible;color:var(--ink)}
+.h-info{padding:clamp(40px,5vw,72px)}
+.h-info .deco{position:absolute;right:clamp(28px,4vw,60px);top:clamp(32px,4vw,60px);width:clamp(70px,9vw,110px);color:var(--green);overflow:visible}
+.status{display:inline-flex;align-items:center;gap:10px;margin-top:18px;font-weight:600;font-size:.95rem}
+.status i{width:10px;height:10px;border-radius:50%;background:var(--pink)}
+.status.open i{background:var(--green)}
+.days{list-style:none;margin:26px 0 0;padding:0}
+.days li{position:relative;display:flex;justify-content:space-between;align-items:baseline;padding:13px 6px;border-bottom:1px solid rgba(34,48,42,.18)}
+.days li .d{font-family:var(--serif);font-size:1.75rem;line-height:1}
+.days li .t{font-size:1rem;font-weight:500}
+.days li.off .t{color:var(--ink-2);text-decoration:line-through;text-decoration-color:var(--pink);text-decoration-thickness:2px}
+.days li .today{position:absolute;left:-46px;top:-24px;width:calc(100% + 92px);height:calc(100% + 38px);color:var(--green);overflow:visible;pointer-events:none}
+.h-info .fine{margin:22px 0 0;color:var(--ink-2)}
+
+/* ============ LOCATION ============ */
+.loc{padding:clamp(70px,9vw,130px) 0 clamp(90px,11vw,150px)}
+.loc-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,80px);align-items:center}
+@media (max-width:860px){.loc-grid{grid-template-columns:1fr}}
+.loc address{font-style:normal;margin-top:22px;font-family:var(--serif);font-size:clamp(1.7rem,2.8vw,2.3rem);line-height:1.1}
+.loc .acts{display:flex;flex-wrap:wrap;gap:14px 18px;margin-top:30px}
+.mapframe{position:relative;transform:rotate(1.2deg)}
+.mapframe .paper{padding:14px}
+.mapframe iframe{display:block;width:100%;aspect-ratio:4/3;height:auto;border:0;filter:grayscale(.6) sepia(.15)}
+.mapframe .tape{position:absolute;width:110px;height:28px;background:rgba(255,224,122,.85);top:-12px;z-index:3}
+.mapframe .t1{left:-18px;transform:rotate(-22deg)}.mapframe .t2{right:-18px;transform:rotate(20deg)}
+.mapframe .here{position:absolute;left:-14px;bottom:-30px;z-index:3;transform:rotate(-5deg)}
+.sketchmap{display:none;position:relative;aspect-ratio:4/3;background:var(--white);overflow:hidden}
+.sketchmap.on{display:block}
+.sketchmap svg{width:100%;height:100%}
+.sketchmap .lab{position:absolute;left:18px;top:16px;font-family:var(--serif);font-size:1.4rem}
+.sketchmap .open{position:absolute;right:14px;bottom:14px}
+
+/* ============ END ============ */
+.end{padding:clamp(40px,5vw,70px) var(--gut) 30px}
+.endcard{max-width:1300px;margin:0 auto;padding:clamp(70px,10vw,140px) clamp(20px,4vw,60px) 40px;text-align:center}
+.endcard .field{opacity:.25}
+.endcard h2{position:relative;margin:0;font-family:var(--brush);font-weight:400;font-size:clamp(4.4rem,17vw,15rem);line-height:.8}
+.endcard .tg{position:relative;font-family:var(--serif);font-style:italic;font-size:clamp(1.5rem,3vw,2.3rem);margin:.4em 0 0}
+.contacts{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;max-width:1000px;margin:clamp(46px,6vw,80px) auto 0;text-align:left}
+@media (max-width:860px){.contacts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.contacts{grid-template-columns:1fr}}
+.contacts div{border-top:1px solid var(--ink);padding-top:12px}
+.contacts h3{margin:0 0 6px}
+.contacts a,.contacts p{margin:0;text-decoration:none;word-break:break-word}
+.contacts a:hover{text-decoration:underline}
+.legal{text-align:center;margin:26px 0 0;font-size:.82rem;color:var(--ink-2)}
+
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- hand-cut paper: wobbly edge + printed speckle -->
+    <filter id="cutf" x="-4%" y="-4%" width="108%" height="108%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="4" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="5" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="9" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 -1.3 0.72" result="speck"/>
+      <feComposite in="speck" in2="d" operator="in" result="s2"/>
+      <feMerge><feMergeNode in="d"/><feMergeNode in="s2"/></feMerge>
+    </filter>
+    <filter id="rough" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence id="turb" type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="2"/><feDisplacementMap in="SourceGraphic" scale="2.2"/></filter>
+    <pattern id="ging" width="60" height="60" patternUnits="userSpaceOnUse"><rect width="60" height="60" fill="#FFFEFB"/><rect width="30" height="60" fill="#EC5F8F" opacity=".38"/><rect width="60" height="30" fill="#EC5F8F" opacity=".38"/></pattern>
+    <symbol id="d-chop" viewBox="0 0 64 64" class="sym"><path pathLength="1" d="M12 5 L42 60"/><path pathLength="1" d="M21 3 L46 58"/><path pathLength="1" d="M13 11 L23 8"/></symbol>
+    <symbol id="d-spoon" viewBox="0 0 64 64" class="sym"><path pathLength="1" d="M22 5 C32 5 34 18 30 26 C27 32 17 32 14 25 C10 17 13 5 22 5 Z"/><path pathLength="1" d="M26 31 Q37 45 52 60"/></symbol>
+    <symbol id="d-fork" viewBox="0 0 64 64" class="sym"><path pathLength="1" d="M24 5 L24 22 Q24 30 32 30 Q40 30 40 22 L40 5"/><path pathLength="1" d="M29.5 5 L29.5 22 M34.5 5 L34.5 22"/><path pathLength="1" d="M32 30 L32 60"/></symbol>
+    <symbol id="d-bowl" viewBox="0 0 64 64" class="sym"><path pathLength="1" d="M7 32 Q32 30 57 32 Q55 53 32 55 Q10 53 7 32 Z"/><path pathLength="1" d="M24 57 L40 57"/><path pathLength="1" d="M25 25 q-4 -6 0 -10 q4 -4 0 -10 M37 25 q-4 -6 0 -10 q4 -4 0 -10"/></symbol>
+    <symbol id="d-cup" viewBox="0 0 64 64" class="sym"><path pathLength="1" d="M13 24 L45 24 L42 49 Q40 54 29 54 Q19 54 17 49 Z"/><path pathLength="1" d="M45 29 Q56 29 54 37 Q52 44 43 42"/><path pathLength="1" d="M7 58 Q30 63 53 58"/><path pathLength="1" d="M26 18 q-3 -5 0 -8 q3 -3 0 -7"/></symbol>
+    <symbol id="d-leaf" viewBox="0 0 64 64" class="sym"><path pathLength="1" d="M10 54 Q12 18 54 10 Q50 50 10 54 Z"/><path pathLength="1" d="M10 54 L42 22"/></symbol>
+    <symbol id="d-orchid" viewBox="0 0 64 64" class="sym"><path pathLength="1" d="M32 30 C22 12 42 6 32 30 Z"/><path pathLength="1" d="M30 32 C12 22 6 40 30 32 Z"/><path pathLength="1" d="M34 32 C52 22 58 40 34 32 Z"/><path pathLength="1" d="M31 34 C18 48 30 58 32 36"/><path pathLength="1" d="M33 34 C46 48 34 58 32 36"/><circle pathLength="1" cx="32" cy="32" r="3"/></symbol>
+    <symbol id="d-chili" viewBox="0 0 64 64" class="sym"><path pathLength="1" d="M10 52 Q30 52 44 31 Q50 21 46 16 Q40 13 36 23 Q27 40 10 52 Z"/><path pathLength="1" d="M45 16 Q47 8 55 7"/></symbol>
+    <symbol id="d-spark" viewBox="0 0 64 64" class="sym"><path pathLength="1" d="M32 12 L32 52 M12 32 L52 32 M20 20 L44 44 M44 20 L20 44"/></symbol>
+    <symbol id="d-squig" viewBox="0 0 64 64" class="sym"><path pathLength="1" d="M4 36 q8 -14 14 0 t14 0 t14 0 t14 0"/></symbol>
+    <symbol id="d-egg" viewBox="0 0 64 64" class="sym"><path pathLength="1" d="M10 30 Q8 12 28 12 Q40 6 50 18 Q60 34 48 46 Q34 58 20 50 Q8 44 10 30 Z"/><circle pathLength="1" cx="30" cy="30" r="8"/></symbol>
+    <symbol id="d-bean" viewBox="0 0 64 64" class="sym"><ellipse pathLength="1" cx="32" cy="32" rx="15" ry="21" transform="rotate(30 32 32)"/><path pathLength="1" d="M24 18 Q36 30 28 46"/></symbol>
+    <symbol id="d-tomato" viewBox="0 0 64 64" class="sym"><circle pathLength="1" cx="32" cy="36" r="18"/><path pathLength="1" d="M32 18 L28 12 M32 18 L38 13 M32 18 L24 20 M32 18 L40 21 M32 18 L32 8"/></symbol>
+  </defs>
+</svg>
+
+<canvas id="grain" aria-hidden="true"></canvas>
+
+<header class="nav" id="nav">
+  <a class="logo" href="#top" aria-label="Orchid Cafe, back to top"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#d-orchid"/></svg>Orchid Cafe</a>
+  <nav aria-label="Main">
+    <ul>
+      <li><button type="button" data-open-menu>Menu</button></li>
+      <li class="hide-m"><a href="#reviews">Reviews</a></li>
+      <li class="hide-m"><a href="#hours">Hours</a></li>
+      <li><a href="#find">Find us</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero" aria-label="Orchid Cafe">
+  <div class="field" id="heroField" aria-hidden="true"></div>
+  <div class="hmeta top eyebrow"><span>St Leonards, NSW</span><span class="rule"></span><p class="tag" style="margin:0">Where orchids meet flavour</p></div>
+
+  <div class="stage" id="stage">
+    <div class="sun" aria-hidden="true"><svg viewBox="-110 -110 220 220"><path id="sunPath" fill="#EC5F8F" filter="url(#cutf)"/></svg></div>
+    <h1 id="title"><span class="t1">Orchid</span> <span class="t2">Cafe</span></h1>
+    <div class="bowl" id="bowl" role="img" aria-label="Top-down photo of a bowl of beef pho. Underneath: rice noodles, sliced beef, chilli, spring onion, pea shoots, bean sprouts and broth.">
+      <div class="under" aria-hidden="true">
+        <ul>
+          <li class="sm" style="top:11%;--r:0deg">what's in the bowl</li>
+          <li style="top:18%;--r:-3deg">rice noodles</li>
+          <li style="top:28%;--r:2deg">sliced beef</li>
+          <li style="top:38%;--r:-3deg">fresh chilli</li>
+          <li style="top:48%;--r:1deg">spring onion</li>
+          <li style="top:58%;--r:-2deg">pea shoots</li>
+          <li style="top:68%;--r:2deg">bean sprouts</li>
+          <li style="top:78%;--r:-2deg">&amp; the broth</li>
+        </ul>
+      </div>
+      <canvas id="phoCanvas" aria-hidden="true"></canvas>
+      <div class="cur" id="cur" aria-hidden="true"><svg viewBox="0 0 100 100" class="draw"><path pathLength="1" d="M50 6 C80 4 96 28 94 52 C92 80 66 96 46 94 C20 92 4 70 6 46 C8 22 30 8 56 10"/></svg></div>
+    </div>
+    <div class="note-l annot" aria-hidden="true">our beef pho —<br>hover the bowl to<br>see what's inside
+      <svg class="draw" viewBox="0 0 120 70"><path pathLength="1" d="M6 6 Q20 56 104 54"/><path pathLength="1" d="M90 42 L106 54 L90 64"/></svg>
+    </div>
+    <button class="peek pill cut" data-fill="#F9CAD8" id="peek" type="button" aria-pressed="false">peek inside</button>
+  </div>
+
+  <svg class="hand-dood draw" id="chopDood" viewBox="0 0 64 64" aria-hidden="true"><use href="#d-chop"/></svg>
+  <svg class="hand-dood draw" id="spoonDood" viewBox="0 0 64 64" aria-hidden="true"><use href="#d-spoon"/></svg>
+
+  <div class="hmeta bottom">
+    <p><span class="eyebrow">Open</span><b>Mon · Tue · Fri · Sat</b></p>
+    <p><span class="eyebrow">Find us</span><b>38 Atchison St</b></p>
+    <p><span class="eyebrow">Google · 61 reviews</span><b>4.9 <span style="color:var(--pink)">★</span></b></p>
+  </div>
+</section>
+
+<div class="marquee cut" data-fill="#2F7A4A" aria-hidden="true"><div class="clip"><div class="track" style="color:var(--white)" data-mq="fresh|vibrant|made with love|breakfast all day|Vietnamese soul|St Leonards"></div></div></div>
+
+<!-- ============ QUOTE ============ -->
+<section class="quote" aria-label="About Orchid Cafe">
+  <div class="wrap">
+    <div class="qcard cut" data-fill="#EC5F8F">
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 400 320" class="draw" id="tableArt" filter="url(#rough)">
+          <path pathLength="1" d="M108 170 Q112 146 200 147 Q292 149 292 170 Q290 194 200 193 Q110 192 108 170 Z"/>
+          <path pathLength="1" d="M150 189 L145 292 M252 189 L257 292 M200 193 L201 304 M148 252 L254 250"/>
+          <path pathLength="1" d="M166 150 L234 150 Q232 176 200 178 Q168 176 166 150 Z"/>
+          <path pathLength="1" d="M188 140 q-6 -10 0 -20 q6 -10 0 -20 M210 140 q-6 -10 0 -20 q6 -10 0 -20"/>
+          <path pathLength="1" d="M248 112 L198 156 M256 118 L204 158"/>
+          <path pathLength="1" d="M254 156 L274 156 L271 172 L257 172 Z M274 160 Q282 161 279 168 Q277 171 272 170"/>
+          <path pathLength="1" d="M58 116 L70 222 M102 126 L104 214 M61 140 L101 147 M64 162 L102 168 M66 184 L103 189"/>
+          <path pathLength="1" d="M56 218 Q80 205 120 213 Q114 230 70 231 Q54 229 56 218 Z"/>
+          <path pathLength="1" d="M66 230 L61 294 M113 226 L116 290 M88 231 L85 284"/>
+          <path pathLength="1" d="M342 116 L330 222 M298 126 L296 214 M339 140 L299 147 M336 162 L298 168 M334 184 L297 189"/>
+          <path pathLength="1" d="M344 218 Q320 205 280 213 Q286 230 330 231 Q346 229 344 218 Z"/>
+          <path pathLength="1" d="M334 230 L339 294 M287 226 L284 290 M312 231 L315 284"/>
+          <path pathLength="1" d="M128 152 Q126 120 136 96 M131 128 q-14 -6 -16 -18 M134 112 q12 -4 16 -16 M130 140 q12 -2 16 -12"/>
+          <path pathLength="1" d="M120 160 L140 160 L138 150 L122 150 Z"/>
+        </svg>
+      </div>
+      <blockquote>
+        <span class="qm" aria-hidden="true">“</span>
+        <p class="q" id="quoteText">Australian breakfast &amp; brunch infused with <span class="hl">Vietnamese soul.<svg viewBox="0 0 200 60" preserveAspectRatio="none" class="draw thick" aria-hidden="true"><path id="hlRing" pathLength="1" d="M18 30 C8 6 184 0 194 26 C202 52 30 64 10 40 C2 28 24 12 60 8"/></svg></span> Fresh, vibrant, and made with love, right in the heart of St Leonards.</p>
+        <footer class="eyebrow">Orchid Cafe · 38 Atchison St, St Leonards</footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENU ============ -->
+<section class="menu" id="menu" aria-labelledby="menuTitle">
+  <div class="menu-head wrap">
+    <a class="stamp" href="#fullmenu" data-open-menu role="button" aria-label="See the full menu">
+      <svg viewBox="-110 -110 220 220" aria-hidden="true"><path id="stampPath" fill="#FFE07A" filter="url(#cutf)"/></svg>
+      <svg class="ringtxt" viewBox="-110 -110 220 220" aria-hidden="true"><defs><path id="stampC" d="M0,0 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#stampC">see the full menu · see the full menu · </textPath></text></svg>
+      <span class="core" aria-hidden="true"><small>All 16 dishes</small>full<br><em>menu</em><svg class="draw" viewBox="0 0 24 24"><path d="M4 20 L19 5 M8 5 L19 5 L19 16"/></svg></span>
+    </a>
+    <h2 class="h2" id="menuTitle">Three plates <em>we love</em></h2>
+    <p>Breakfast all day. Lunch from 11am to 2:30pm.</p>
+  </div>
+
+  <div class="cloth cut" data-fill="url(#ging)">
+    <div class="dishes" id="dishes">
+      <article class="dish" data-side="left" style="--x:4%">
+        <div class="pwrap" style="--hy:24%;--hr:-8deg">
+          <div class="plate"><div class="photo"><img src="assets/benny.webp" alt="Orchid Egg Benedict on a toasted croissant" loading="lazy" width="900" height="900"></div></div>
+          <div class="hand" aria-hidden="true"><div class="hin"></div></div>
+        </div>
+        <div class="docket cut" data-fill="#FFFEFB" style="--rot:4deg"><span class="no">NO. 01</span><h3>Orchid Egg Benedict</h3><p class="pr">$15.50</p><p class="ds">2 poached eggs on toasted croissant, sauté spinach and Orchid hollandaise sauce</p></div>
+      </article>
+      <article class="dish" data-side="right" style="--x:0">
+        <div class="pwrap" style="--hy:40%;--hr:8deg">
+          <div class="plate"><div class="photo"><img src="assets/angus.webp" alt="Angus beef burger and chips" loading="lazy" width="900" height="900"></div></div>
+          <div class="hand" aria-hidden="true"><div class="hin"></div></div>
+        </div>
+        <div class="docket cut" data-fill="#FFFEFB" style="--rot:-3deg"><span class="no">NO. 02</span><h3>Angus Beef Burger</h3><p class="pr">$18.40</p><p class="ds">Angus beef patty, BLT, Orchid burger sauce, onion jam, American cheese and chips</p></div>
+      </article>
+      <article class="dish" data-side="left" style="--x:14%">
+        <div class="pwrap" style="--hy:14%;--hr:6deg">
+          <div class="plate"><div class="photo"><img src="assets/bacon.webp" alt="Bacon egg roll with hash browns" loading="lazy" width="900" height="900"></div></div>
+          <div class="hand" aria-hidden="true"><div class="hin"></div></div>
+        </div>
+        <div class="docket cut" data-fill="#FFFEFB" style="--rot:3deg"><span class="no">NO. 03</span><h3>Bacon Egg Rolls</h3><p class="pr">$12.50</p><p class="ds">Double bacon, 2 fried eggs, cheese and your favourite sauce</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="reviews" id="reviews" aria-labelledby="rvTitle">
+  <div class="wrap rv-head">
+    <h2 class="h2" id="rvTitle">Notes from<br><em>the regulars</em></h2>
+    <div class="score">
+      <svg viewBox="0 0 200 100" preserveAspectRatio="none" class="draw thick" aria-hidden="true"><path id="scoreRing" pathLength="1" d="M20 50 C10 14 180 4 192 44 C202 86 40 102 14 66 C4 50 30 26 60 20"/></svg>
+      <div class="n">4.9 <span style="color:var(--pink)">★</span></div><div class="eyebrow">61 Google reviews</div>
+    </div>
+  </div>
+  <div class="notes-wrap" id="notesWrap">
+    <span class="edge l cut" data-fill="#F9CAD8" aria-hidden="true"><svg class="draw" viewBox="0 0 24 24"><path d="M15 4 L7 12 L15 20"/></svg></span>
+    <span class="edge r cut" data-fill="#F9CAD8" aria-hidden="true"><svg class="draw" viewBox="0 0 24 24"><path d="M9 4 L17 12 L9 20"/></svg></span>
+    <div class="notes" id="notes" tabindex="0" aria-label="Google reviews. Use arrow keys to move.">
+      <figure class="rv cut" data-fill="#FFFEFB" style="--rot:-2deg"><div class="st" aria-label="5 stars">★★★★★</div><p>“What a hidden gem! The food is so delicious and affordable! Perfect poached eggs and I don't know what it is about the bacon but it's absolutely delicious, Perfectly crisped. Can't believe how affordable it is as well and the coffee is …”</p><figcaption>Seph Allcorn<small>Local Guide</small></figcaption></figure>
+      <figure class="rv cut" data-fill="#F9CAD8" style="--rot:1.5deg"><div class="st" aria-label="5 stars" style="color:var(--ink)">★★★★★</div><p>“Must try! Had the BEST reuben sandwich here today, so delicious &amp; fresh, you can tell a lot of love goes into thier cooking. The coffee was really good too. Its a small little cafe with excellent customer service and friendly staff. Very reasonably priced menu as well. I'll be coming back soon for sure. …”</p><figcaption>Sam Briggs<small>Local Guide</small></figcaption></figure>
+      <figure class="rv cut" data-fill="#FFFEFB" style="--rot:-1deg"><div class="st" aria-label="4 stars">★★★★<span style="opacity:.3">★</span></div><p>“Quite a hidden gem this cafe, serving nice brunch menu and some Vietnamese dishes. Had the big breakfast with chorizo, bun cha nem, and their beef pho. Very home style cooking vibes which has its little charm and quite nice. Coffee is good, quite strong roast though. …”</p><figcaption>Brandon Wu<small>Local Guide</small></figcaption></figure>
+      <figure class="rv cut" data-fill="#F9CAD8" style="--rot:2deg"><div class="st" aria-label="5 stars" style="color:var(--ink)">★★★★★</div><p>“Walked in for pho. Good portion of meat and delicious broth! Very competitive quality in local area :) …”</p><figcaption>Joey Liu<small>Google review</small></figcaption></figure>
+      <figure class="rv cut" data-fill="#FFFEFB" style="--rot:-1.5deg"><div class="st" aria-label="5 stars">★★★★★</div><p>“Such a lovely lady owner with a nice smile. I had pastries and they were delicious and tasty. You can clearly see they put their heart into their business. Must come back for their great coffee that other patrons commented and for a meal. …”</p><figcaption>Dora Eflin<small>Local Guide</small></figcaption></figure>
+    </div>
+  </div>
+  <p class="rv-src">Reviews quoted from Google.</p>
+</section>
+
+<div class="marquee b2 cut" data-fill="#EC5F8F" aria-hidden="true"><div class="clip"><div class="track" data-mq="open Mon · Tue · Fri · Sat|7:30am – 2:30pm|38 Atchison St|come hungry"></div></div></div>
+
+<!-- ============ HOURS ============ -->
+<section class="hours" id="hours" aria-labelledby="hTitle">
+  <div class="hgrid">
+    <div class="h-art cut" data-fill="#EC5F8F">
+      <p class="big" aria-hidden="true">come<br>on in.</p>
+      <svg viewBox="0 0 400 420" class="draw" id="pourArt" filter="url(#rough)" aria-hidden="true">
+        <path pathLength="1" d="M-40 20 L40 34 L36 92 L-40 86"/>
+        <path pathLength="1" d="M40 40 Q66 30 76 48 Q82 66 64 80 Q52 88 40 84"/>
+        <path pathLength="1" d="M52 46 Q62 56 54 70"/>
+        <path pathLength="1" d="M84 40 L178 30 L184 112 Q156 132 112 128 L86 120 Z"/>
+        <path pathLength="1" d="M178 30 Q200 32 212 52"/>
+        <path pathLength="1" d="M100 60 L170 54 M104 84 L168 80"/>
+        <path pathLength="1" d="M212 54 Q220 130 214 238 M218 56 Q226 130 220 238"/>
+        <path pathLength="1" d="M118 250 L310 250 Q306 344 214 352 Q122 344 118 250 Z"/>
+        <path pathLength="1" d="M128 252 Q214 268 300 252"/>
+        <path pathLength="1" d="M200 262 C190 254 182 266 214 280 C246 266 238 254 228 262"/>
+        <path pathLength="1" d="M306 268 Q350 266 346 298 Q342 326 296 318"/>
+        <path pathLength="1" d="M84 368 Q214 400 344 368"/>
+        <path pathLength="1" d="M300 200 q-8 -14 0 -26 q8 -12 0 -26 M330 214 q-8 -14 0 -26 q8 -12 0 -26"/>
+      </svg>
+    </div>
+    <div class="h-info cut" data-fill="#FFFEFB">
+      <svg class="deco draw" viewBox="0 0 100 100" filter="url(#rough)" aria-hidden="true">
+        <circle pathLength="1" cx="50" cy="50" r="40"/><path pathLength="1" d="M50 24 L50 52 L68 62"/>
+        <path pathLength="1" d="M50 4 L50 0 M96 50 L100 50 M50 96 L50 100 M4 50 L0 50"/>
+      </svg>
+      <span class="eyebrow">Hours</span>
+      <h2 class="h2" id="hTitle" style="font-size:clamp(2.8rem,6vw,5rem)">Opening <em>hours</em></h2>
+      <p class="status" id="status" aria-live="polite"><i aria-hidden="true"></i><span>Mon, Tue, Fri, Sat 7:30am – 2:30pm</span></p>
+      <ul class="days" id="days">
+        <li data-d="1"><span class="d">Monday</span><span class="t">7:30am – 2:30pm</span></li>
+        <li data-d="2"><span class="d">Tuesday</span><span class="t">7:30am – 2:30pm</span></li>
+        <li data-d="3" class="off"><span class="d">Wednesday</span><span class="t">Closed</span></li>
+        <li data-d="4" class="off"><span class="d">Thursday</span><span class="t">Closed</span></li>
+        <li data-d="5"><span class="d">Friday</span><span class="t">7:30am – 2:30pm</span></li>
+        <li data-d="6"><span class="d">Saturday</span><span class="t">7:30am – 2:30pm</span></li>
+        <li data-d="0" class="off"><span class="d">Sunday</span><span class="t">Closed</span></li>
+      </ul>
+      <p class="fine">Breakfast all day · Lunch 11am – 2:30pm</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOCATION ============ -->
+<section class="loc" id="find" aria-labelledby="fTitle">
+  <div class="wrap loc-grid">
+    <div>
+      <span class="eyebrow">Visit</span>
+      <h2 class="h2" id="fTitle">Find <em>us</em></h2>
+      <address>38 Atchison St<br>St Leonards NSW 2065</address>
+      <p style="margin:14px 0 0;max-width:36ch;color:var(--ink-2)">A small, cozy spot in St Leonards where great coffee meets delicious food.</p>
+      <div class="acts">
+        <a class="pill cut" data-fill="#EC5F8F" href="https://www.google.com/maps/dir/?api=1&amp;destination=38+Atchison+St+St+Leonards+NSW+2065" target="_blank" rel="noopener">Get directions <svg class="arr draw" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20 L19 5 M8 5 L19 5 L19 16"/></svg></a>
+        <a class="pill cut" data-fill="#F9CAD8" href="tel:0423245052">Call 0423 245 052</a>
+      </div>
+    </div>
+    <div class="mapframe">
+      <span class="tape t1" aria-hidden="true"></span><span class="tape t2" aria-hidden="true"></span>
+      <div class="paper cut" data-fill="#FFFEFB">
+        <iframe id="gmap" title="Map showing Orchid Cafe at 38 Atchison St, St Leonards" referrerpolicy="no-referrer-when-downgrade" allowfullscreen src="https://www.google.com/maps?q=38+Atchison+St,+St+Leonards+NSW+2065&amp;z=16&amp;output=embed"></iframe>
+        <div class="sketchmap" id="sketchmap">
+          <svg viewBox="0 0 400 300" class="draw" filter="url(#rough)" aria-hidden="true">
+            <path d="M-10 113 Q120 105 220 119 T410 111 M-10 127 Q120 119 220 133 T410 125"/>
+            <path d="M144 -10 Q154 120 140 310 M156 -10 Q166 120 152 310"/>
+            <path d="M294 -10 Q284 140 306 310 M306 -10 Q296 140 318 310"/>
+            <path d="M-10 224 Q200 216 410 230 M-10 236 Q200 228 410 242"/>
+            <path d="M226 46 C226 22 262 22 262 46 C262 66 244 82 244 96 C244 82 226 66 226 46 Z" style="fill:#EC5F8F"/>
+            <circle cx="244" cy="46" r="7" style="fill:#FFFEFB"/>
+          </svg>
+          <span class="lab">Orchid Cafe · 38 Atchison St</span>
+          <a class="open pill cut" data-fill="#F9CAD8" href="https://www.google.com/maps/search/?api=1&amp;query=38+Atchison+St+St+Leonards+NSW+2065" target="_blank" rel="noopener">Open in Google Maps</a>
+        </div>
+      </div>
+      <span class="here pill cut annot" data-fill="#F9CAD8" aria-hidden="true">we're here!</span>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ END ============ -->
+<footer class="end" aria-label="Contact">
+  <div class="endcard cut" data-fill="#EC5F8F">
+    <div class="field" id="endField" aria-hidden="true"></div>
+    <h2>Orchid Cafe</h2>
+    <p class="tg">Where orchids meet flavour</p>
+    <div class="contacts">
+      <div><h3 class="eyebrow">Visit</h3><p>38 Atchison St<br>St Leonards NSW 2065</p></div>
+      <div><h3 class="eyebrow">Call</h3><a href="tel:0423245052">0423 245 052</a></div>
+      <div><h3 class="eyebrow">Email</h3><a href="mailto:Info@orchidcafe.net">Info@orchidcafe.net</a></div>
+      <div><h3 class="eyebrow">Hours</h3><p>Mon, Tue, Fri, Sat<br>7:30am – 2:30pm</p></div>
+    </div>
+  </div>
+  <p class="legal">© Orchid Cafe · <a href="https://orchidcafe.net/">orchidcafe.net</a></p>
+</footer>
+
+<button class="floatmenu pill cut" data-fill="#FFE07A" id="floatMenu" type="button" data-open-menu tabindex="-1">Full menu <svg class="arr draw" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20 L19 5 M8 5 L19 5 L19 16"/></svg></button>
+
+<!-- ============ FULL MENU ============ -->
+<dialog class="full" id="fullmenu" aria-labelledby="fmTitle" data-lenis-prevent>
+  <div class="in">
+    <header>
+      <h2 class="h2" id="fmTitle">The full <em>menu</em></h2>
+      <button class="x" type="button" id="closeMenu" aria-label="Close menu"><svg viewBox="0 0 52 52" class="draw"><path d="M16 14 Q26 26 38 38 M38 14 Q26 26 14 38"/><path d="M26 3 C42 2 50 14 49 27 C48 42 36 50 25 49 C12 48 3 38 4 25 C5 12 15 4 30 4"/></svg></button>
+    </header>
+    <div class="cols">
+      <div>
+        <h3>Breakfast <small>All day</small></h3>
+        <ul>
+          <li><div class="row"><span>Toast</span><span class="dots"></span><span class="pr">$8.00</span></div><p>Sourdough/Turkish with condiments</p></li>
+          <li><div class="row"><span>Avocado Toast</span><span class="dots"></span><span class="pr">$15.00</span></div><p>Toasted sourdough topped with smashed avocado, spinach, poach eggs, fetta and dukka</p></li>
+          <li><div class="row"><span>Breakfast Wrap</span><span class="dots"></span><span class="pr">$13.80</span></div><p>Spinach, double bacon, 2 fried eggs, cheese and your favourite sauce. Served with hash brown</p></li>
+          <li><div class="row"><span>Egg Your Way</span><span class="dots"></span><span class="pr">$12.20</span></div><p>2 poached/fried/scrambled eggs on sourdough toast</p></li>
+          <li><div class="row"><span>Bacon Egg Rolls</span><span class="dots"></span><span class="pr">$12.50</span></div><p>Double bacon, 2 fried eggs, cheese and your favourite sauce</p></li>
+          <li><div class="row"><span>Halloumi Stack</span><span class="dots"></span><span class="pr">$18.00</span></div><p>Grilled halloumi, avocado, crispy bacon, spinach, 2 poach eggs on sourdough toast, served with spice pumpkin spread</p></li>
+          <li><div class="row"><span>BLAT Sandwich</span><span class="dots"></span><span class="pr">$15.80</span></div><p>Bacon, lettuce, tomato, avocado on sourdough/brioche bun with mayonnaise. Add 2 hash brown for $4</p></li>
+          <li><div class="row"><span>Orchid Egg Benedict</span><span class="dots"></span><span class="pr">$15.50</span></div><p>2 poached eggs on toasted croissant, sauté spinach and Orchid hollandaise sauce</p></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Brunch &amp; Lunch <small>11am – 2:30pm</small></h3>
+        <ul>
+          <li><div class="row"><span>Soup for the Winter</span><span class="dots"></span><span class="pr">$15.20</span></div><p>Roast sweet potato pumpkin soup with coconut cream, served with sourdough</p></li>
+          <li><div class="row"><span>Chicken Avocado Wrap</span><span class="dots"></span><span class="pr">$12.50</span></div><p>Roast chicken, mayonnaise, spinach, tomato, avocado in tortilla, toasted. Add chips for $4</p></li>
+          <li><div class="row"><span>Reuben Beef Sandwich</span><span class="dots"></span><span class="pr">$18.50</span></div><p>House-made corn beef sandwich on toasted sourdough, with Swiss cheese, sauerkraut, Russian dressing and chips</p></li>
+          <li><div class="row"><span>Empress Bowl</span><span class="dots"></span><span class="pr">$13.60</span></div><p>Shredded kale, brown rice, Spanish onion, steam broccolini, boiled egg, cucumber ribbon and Japanese sesame dressing. Add chicken for $6</p></li>
+          <li><div class="row"><span>Teriyaki Tofu Soba Noodle Salad</span><span class="dots"></span><span class="pr">$15.80</span></div><p>Soba noodles, cabbage carrot slaw, teriyaki tofu, edamame bean, soy sesame dressing. Add scotch fillet for $11 or chicken for $6</p></li>
+          <li><div class="row"><span>Steak Sandwich</span><span class="dots"></span><span class="pr">$21.50</span></div><p>180g scotch steak, grilled on toasted Turkish, mayo, mesclun, tomato, cheese, onion jam and smoky BBQ</p></li>
+          <li><div class="row"><span>Angus Beef Burger</span><span class="dots"></span><span class="pr">$18.40</span></div><p>Angus beef patty, BLT, Orchid burger sauce, onion jam, American cheese and chips</p></li>
+          <li><div class="row"><span>Chicken Schnitzel Burger</span><span class="dots"></span><span class="pr">$17.60</span></div><p>House-made corn-crusted chicken schnitzel, chipotle mayo, cabbage slaw, cheese and chips</p></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const HAS_GSAP=!!window.gsap;if(HAS_GSAP)gsap.registerPlugin(ScrollTrigger);
+const NS='http://www.w3.org/2000/svg';
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const rand=(a,b)=>a+Math.random()*(b-a);
+function prng(seed){return()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646}}
+
+/* ---------- cut-paper shapes ---------- */
+function cutPath(w,h,r,rnd){
+  const j=Math.min(2.4,Math.max(1,Math.min(w,h)*.012)),pts=[];r=Math.min(r,h/2,w/2);
+  const seg=(x1,y1,x2,y2)=>{const L=Math.hypot(x2-x1,y2-y1),n=Math.max(1,Math.round(L/36));for(let i=0;i<n;i++){const t=i/n;pts.push([x1+(x2-x1)*t+(rnd()-.5)*j*2,y1+(y2-y1)*t+(rnd()-.5)*j*2])}};
+  const arc=(cx,cy,a0)=>{const n=r>12?8:3;for(let i=0;i<n;i++){const a=a0+i/n*Math.PI/2;pts.push([cx+Math.cos(a)*r+(rnd()-.5)*j,cy+Math.sin(a)*r+(rnd()-.5)*j])}};
+  seg(r,0,w-r,0);arc(w-r,r,-Math.PI/2);seg(w,r,w,h-r);arc(w-r,h-r,0);seg(w-r,h,r,h);arc(r,h-r,Math.PI/2);seg(0,h-r,0,r);arc(r,r,Math.PI);
+  return 'M'+pts.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L')+'Z';
+}
+const cuts=$$('.cut');
+function paint(el,k){
+  const w=el.offsetWidth,h=el.offsetHeight;if(!w||!h)return;
+  let svg=el.querySelector(':scope > svg.cutbg');
+  if(!svg){svg=document.createElementNS(NS,'svg');svg.setAttribute('class','cutbg');svg.setAttribute('aria-hidden','true');svg.innerHTML='<path filter="url(#cutf)"/>';el.prepend(svg);}
+  svg.setAttribute('width',w);svg.setAttribute('height',h);svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
+  const isPill=el.classList.contains('pill')||el.classList.contains('edge');
+  const p=svg.firstChild;p.setAttribute('d',cutPath(w,h,isPill?h/2:7,prng(1000+k*97)));p.setAttribute('fill',el.dataset.fill||'#fff');
+}
+cuts.forEach(paint);
+const ro=new ResizeObserver(es=>es.forEach(e=>paint(e.target,cuts.indexOf(e.target))));cuts.forEach(c=>ro.observe(c));
+document.fonts&&document.fonts.ready.then(()=>cuts.forEach(paint));
+
+function scallop(id,R,n,amp,seed){const el=document.getElementById(id);if(!el)return;const r0=prng(seed);let d='';const N=n*10;
+  for(let i=0;i<=N;i++){const a=i/N*Math.PI*2,r=R+amp*Math.cos(a*n)+(r0()-.5)*1.6;d+=(i?'L':'M')+(Math.cos(a)*r).toFixed(2)+' '+(Math.sin(a)*r).toFixed(2);}el.setAttribute('d',d+'Z');}
+scallop('sunPath',100,20,6,7);scallop('stampPath',100,16,6,11);
+
+/* ---------- smooth scroll ---------- */
+let lenis=null;
+if(!RM&&window.Lenis){lenis=new Lenis({lerp:.1});if(HAS_GSAP){lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);}else{const f=t=>{lenis.raf(t);requestAnimationFrame(f)};requestAnimationFrame(f);}}
+$$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{if(a.hasAttribute('data-open-menu'))return;const t=$(a.getAttribute('href'));if(!t)return;e.preventDefault();lenis?lenis.scrollTo(t,{offset:-60}):t.scrollIntoView({behavior:RM?'auto':'smooth'});}));
+const nav=$('#nav');addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>40),{passive:true});
+
+/* ---------- doodle wallpaper (one pen, one colour, quiet) ---------- */
+const POOL=['d-chop','d-chop','d-spoon','d-spoon','d-fork','d-bowl','d-cup','d-leaf','d-orchid','d-chili','d-spark','d-squig','d-egg','d-bean','d-tomato'];
+function scatter(el,{cell=130,op=.3,color='var(--ink)',skip=.3}={}){
+  el.innerHTML='';const w=el.clientWidth,h=el.clientHeight,out=[];
+  for(let r=0;r<Math.ceil(h/cell);r++)for(let c=0;c<Math.ceil(w/cell);c++){
+    if(Math.random()<skip)continue;const s=cell*.36;
+    const svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox','0 0 64 64');
+    svg.style.cssText=`left:${c*cell+rand(0,cell-s)}px;top:${r*cell+rand(0,cell-s)}px;width:${s}px;height:${s}px;transform:rotate(${rand(-35,35)}deg);opacity:${op};color:${color};stroke-dasharray:1;stroke-dashoffset:${RM?0:1}`;
+    const u=document.createElementNS(NS,'use');u.setAttribute('href','#'+POOL[Math.random()*POOL.length|0]);svg.appendChild(u);el.appendChild(svg);out.push(svg);}
+  return out;}
+const heroField=$('#heroField'),endField=$('#endField');
+let heroDoods=scatter(heroField,{cell:innerWidth<700?100:130});
+let endDoods=scatter(endField,{cell:140,op:.9});endDoods.forEach(d=>d.style.strokeDashoffset=0);
+let lastW=innerWidth;addEventListener('resize',()=>{if(Math.abs(innerWidth-lastW)<80)return;lastW=innerWidth;
+  heroDoods=scatter(heroField,{cell:innerWidth<700?100:130});heroDoods.forEach(d=>d.style.strokeDashoffset=0);
+  endDoods=scatter(endField,{cell:140,op:.9});endDoods.forEach(d=>d.style.strokeDashoffset=0);});
+heroField.setAttribute('filter','url(#rough)');heroField.style.filter='url(#rough)';
+if(!RM){const turb=$('#turb');let seed=2;setInterval(()=>{if(scrollY<innerHeight){seed=(seed%5)+1;turb.setAttribute('seed',seed);}},180);}
+
+/* marquees */
+$$('.marquee .track').forEach(t=>{const words=t.dataset.mq.split('|');let h='';
+  for(let k=0;k<2;k++)words.forEach(w=>{h+=`<span>${w}</span><svg viewBox="0 0 64 64" class="sym"><use href="#d-orchid"/></svg>`});t.innerHTML=h+h;});
+
+/* hero utensils, anchored symmetrically to the bowl */
+const chop=$('#chopDood'),spoon=$('#spoonDood');
+function placeUtensils(){const b=$('#bowl').getBoundingClientRect(),h=$('#hero').getBoundingClientRect(),D=b.width;
+  const cx=b.left-h.left+D/2,cy=b.top-h.top+D/2,s=Math.max(100,D*.5);
+  Object.assign(chop.style,{width:s+'px',height:s+'px',left:(cx+D*.55)+'px',top:(cy-s*.6)+'px',transform:'rotate(-6deg)'});
+  Object.assign(spoon.style,{width:s+'px',height:s+'px',left:(cx-D*.55-s)+'px',top:(cy-s*.4)+'px',transform:'rotate(-64deg) scaleX(-1)'});}
+placeUtensils();addEventListener('resize',placeUtensils);
+
+/* ---------- PHO REVEAL ---------- */
+const bowl=$('#bowl'),cv=$('#phoCanvas'),ctx=cv.getContext('2d'),cur=$('#cur');
+const img=new Image();img.src='assets/pho.webp';
+let D=0,dpr=1,trail=[],ptr={x:0,y:0,tx:0,ty:0,in:false},peekOn=false,peekA=0,running=false,t0=performance.now(),auto=null,ptrUser=false;
+function sizeCanvas(){dpr=Math.min(2,devicePixelRatio||1);D=bowl.offsetWidth;cv.width=cv.height=Math.round(D*dpr);draw();}
+function blob(x,y,r,t){ctx.beginPath();const n=36;for(let i=0;i<=n;i++){const a=i/n*Math.PI*2,rr=r*(1+.13*Math.sin(3*a+t*2.1)+.07*Math.sin(5*a-t*1.4)+.04*Math.sin(9*a+t*3));const px=x+Math.cos(a)*rr,py=y+Math.sin(a)*rr;i?ctx.lineTo(px,py):ctx.moveTo(px,py);}ctx.closePath();ctx.fill();}
+function draw(){if(!img.complete||!D)return;const S=D*dpr,t=(performance.now()-t0)/1000;
+  ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation='source-over';ctx.clearRect(0,0,S,S);
+  ctx.globalAlpha=1-peekA;const rot=RM?0:t*.14+scrollY*.003;ctx.translate(S/2,S/2);ctx.rotate(rot);ctx.drawImage(img,-S/2,-S/2,S,S);ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=1;
+  ctx.globalCompositeOperation='destination-out';ctx.setTransform(dpr,0,0,dpr,0,0);const R=D*.17;
+  for(const p of trail)blob(p.x,p.y,R*Math.pow(p.life,.6),t+p.seed);if(ptr.in)blob(ptr.x,ptr.y,R,t);ctx.globalCompositeOperation='source-over';}
+let heroVis=true;new IntersectionObserver(e=>{heroVis=e[0].isIntersecting;kick()}).observe($('#hero'));
+function loop(){ptr.x+=(ptr.tx-ptr.x)*.22;ptr.y+=(ptr.ty-ptr.y)*.22;
+  if(ptr.in){const last=trail[trail.length-1];if(!last||Math.hypot(last.x-ptr.x,last.y-ptr.y)>D*.03)trail.push({x:ptr.x,y:ptr.y,life:1,seed:Math.random()*9});}
+  trail.forEach(p=>p.life-=.018);trail=trail.filter(p=>p.life>0);peekA+=((peekOn?1:0)-peekA)*(RM?1:.12);
+  cur.style.transform=`translate(${ptr.x}px,${ptr.y}px)`;draw();
+  if((heroVis&&!RM)||ptr.in||trail.length||Math.abs(peekA-(peekOn?1:0))>.01||auto)requestAnimationFrame(loop);else running=false;}
+function kick(){if(!running){running=true;requestAnimationFrame(loop)}}
+function setPtr(e,snap){const r=bowl.getBoundingClientRect();ptr.tx=e.clientX-r.left;ptr.ty=e.clientY-r.top;if(snap){ptr.x=ptr.tx;ptr.y=ptr.ty}
+  ptr.in=Math.hypot(ptr.tx-D/2,ptr.ty-D/2)<D/2;cur.style.opacity=ptr.in&&e.pointerType!=='touch'?1:0;kick();}
+cv.addEventListener('pointerenter',e=>{ptrUser=true;setPtr(e,true)});
+cv.addEventListener('pointermove',e=>{if(e.pointerType==='touch'&&!e.buttons&&e.pressure===0)return;setPtr(e)});
+cv.addEventListener('pointerdown',e=>{ptrUser=true;setPtr(e,true)});
+cv.addEventListener('pointerleave',()=>{ptr.in=false;cur.style.opacity=0;kick()});
+cv.addEventListener('pointerup',e=>{if(e.pointerType==='touch'){ptr.in=false;kick()}});
+img.onload=sizeCanvas;if(img.complete)sizeCanvas();addEventListener('resize',sizeCanvas);
+$('#peek').addEventListener('click',e=>{peekOn=!peekOn;const b=e.currentTarget;b.setAttribute('aria-pressed',peekOn);b.lastChild.textContent=peekOn?'show the pho':'peek inside';kick();});
+function autoPeek(){if(RM)return;const start=performance.now(),dur=2600;auto=true;kick();
+  (function step(now){const k=(now-start)/dur;if(k>=1||ptrUser){auto=null;if(!ptrUser)ptr.in=false;kick();return;}
+    const a=k*Math.PI*2;ptr.tx=D*(.5+.26*Math.sin(a));ptr.ty=D*(.42+.14*Math.sin(2*a));if(k<.02){ptr.x=ptr.tx;ptr.y=ptr.ty}ptr.in=true;requestAnimationFrame(step);})(start);}
+
+/* ---------- hours status (Sydney) ---------- */
+(function(){const parts=Object.fromEntries(new Intl.DateTimeFormat('en-AU',{timeZone:'Australia/Sydney',weekday:'short',hour:'numeric',minute:'numeric',hour12:false}).formatToParts(new Date()).map(p=>[p.type,p.value]));
+  const wd={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}[parts.weekday],mins=(+parts.hour%24)*60+(+parts.minute);
+  const open=[1,2,5,6],names=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],isOpen=open.includes(wd)&&mins>=450&&mins<870;let msg;
+  if(isOpen)msg='Open now · until 2:30pm';else if(open.includes(wd)&&mins<450)msg='Closed · opens today 7:30am';
+  else{let d=wd;for(let i=1;i<=7;i++){d=(wd+i)%7;if(open.includes(d))break;}msg='Closed · opens '+(d===(wd+1)%7?'tomorrow':names[d])+' 7:30am';}
+  const st=$('#status');st.classList.toggle('open',isOpen);st.querySelector('span').textContent=msg;
+  const li=$(`#days li[data-d="${wd}"]`);if(li){const s=document.createElementNS(NS,'svg');s.setAttribute('class','today draw thick');s.setAttribute('viewBox','0 0 200 40');s.setAttribute('preserveAspectRatio','none');s.setAttribute('aria-hidden','true');
+    s.innerHTML='<path pathLength="1" d="M8 20 C4 2 192 -2 196 16 C200 36 24 40 6 24 C0 14 22 4 56 3"/>';li.appendChild(s);
+    const lab=document.createElement('span');lab.className='sr';lab.textContent=' (today)';li.querySelector('.d').appendChild(lab);}})();
+
+/* ---------- menu hands (line art, green cut-paper sleeves) + rim labels ---------- */
+const HAND=`<svg viewBox="0 0 300 160"><path d="M-700 42 L132 38 L136 124 L-700 120 Z" fill="#2F7A4A" filter="url(#cutf)"/>
+<g class="draw" style="color:#22302A"><path d="M136 50 Q160 40 186 46 L248 40 Q262 39 262 50 Q262 59 248 60 L204 63 L264 66 Q276 68 274 78 Q272 87 260 87 L206 85 L256 93 Q267 96 264 106 Q261 114 249 111 L204 104 L238 117 Q248 122 243 130 Q238 135 228 132 L184 121 Q156 126 136 116 Z" style="fill:#FFFEFB"/>
+<path d="M170 50 Q188 30 208 24 Q220 21 219 31 Q217 40 198 52" style="fill:#FFFEFB"/><path d="M132 40 L136 124"/></g></svg>`;
+const DATA=[['Orchid Egg Benedict','15.50'],['Angus Beef Burger','18.40'],['Bacon Egg Rolls','12.50']];
+$$('.dish').forEach((d,i)=>{d.querySelector('.hin').innerHTML=HAND;const plate=d.querySelector('.plate');
+  plate.insertAdjacentHTML('afterbegin',`<svg class="rim draw" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="49" style="fill:#FFFEFB"/><circle cx="50" cy="50" r="38.6"/></svg>`);
+  const id='arc'+i,flip=d.dataset.side==='right';
+  plate.insertAdjacentHTML('beforeend',`<svg class="label" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="${id}" d="M 7 50 A 43 43 0 0 1 93 50"/></defs><text><textPath href="#${id}" startOffset="50%" text-anchor="middle">${DATA[i][0]} · $${DATA[i][1]}</textPath></text></svg>`);
+  d.querySelector('.label').style.transform=`rotate(${flip?22:-22}deg)`;});
+
+/* ---------- full menu dialog ---------- */
+const dlg=$('#fullmenu');
+$$('[data-open-menu]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();dlg.showModal();dlg.scrollTop=0;document.documentElement.style.overflow='hidden';
+  if(HAS_GSAP&&!RM){gsap.fromTo(dlg,{clipPath:'circle(0% at 50% 0%)'},{clipPath:'circle(150% at 50% 0%)',duration:.8,ease:'power3.inOut'});gsap.from($$('.cols li',dlg),{y:16,opacity:0,stagger:.025,duration:.5,delay:.3,ease:'power2.out'});}}));
+$('#closeMenu').addEventListener('click',()=>dlg.close());
+dlg.addEventListener('close',()=>{document.documentElement.style.overflow='';});
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
+
+/* floating full-menu pill inside the menu section */
+(function(){const fm=$('#floatMenu');let inMenu=false,stampVis=false;const upd=()=>{const on=inMenu&&!stampVis;fm.classList.toggle('on',on);fm.tabIndex=on?0:-1;};
+  new IntersectionObserver(e=>{inMenu=e[0].isIntersecting;upd()},{rootMargin:'-30% 0px -30% 0px'}).observe($('#menu'));
+  new IntersectionObserver(e=>{stampVis=e[0].isIntersecting;upd()}).observe($('.stamp'));})();
+
+/* map fallback (preview sandboxes block embeds) */
+(function(){const f=$('#gmap'),s=$('#sketchmap');const fail=()=>{if(f.isConnected){f.remove();s.classList.add('on');paint(s.querySelector('.open'),999);}};
+  document.addEventListener('securitypolicyviolation',e=>{if(/frame|child/.test(e.violatedDirective||'')||/google/.test(e.blockedURI||''))fail();});
+  fetch('https://www.google.com/maps?output=embed',{mode:'no-cors'}).catch(fail);})();
+
+/* ---------- reviews: cursor-steered looping carousel ---------- */
+(function(){const el=$('#notes'),wrap=$('#notesWrap'),L=$('.edge.l',wrap),R=$('.edge.r',wrap);
+  const cards=$$('.rv',el),track=document.createElement('div');track.className='rtrack';
+  cards.forEach(c=>track.appendChild(c));cards.forEach(c=>{const k=c.cloneNode(true);k.setAttribute('aria-hidden','true');k.querySelector('svg.cutbg')?.remove();track.appendChild(k)});el.appendChild(track);
+  const all=$$('.rv',track);all.slice(cards.length).forEach((c,k)=>{cuts.push(c);paint(c,cuts.length);ro.observe(c)});
+  const base=all.map(c=>parseFloat(c.style.getPropertyValue('--rot'))||0),idle=RM?0:-.35;
+  let x=0,v=0,target=idle,setW=1,drag=null,vis=false;
+  const measure=()=>{setW=all[cards.length].offsetLeft-all[0].offsetLeft||1};measure();addEventListener('resize',measure);
+  new IntersectionObserver(e=>{vis=e[0].isIntersecting}).observe(el);
+  (function frame(){if(vis){if(!drag){v+=(target-v)*.08;x+=v;}if(x<=-setW)x+=setW;if(x>0)x-=setW;
+    track.style.transform=`translate3d(${x}px,0,0)`;const tilt=Math.max(-10,Math.min(10,v*1.1));
+    all.forEach((c,k)=>c.style.transform=`rotate(${base[k]+tilt*(k%2?-.6:1)}deg)`);}requestAnimationFrame(frame);})();
+  wrap.addEventListener('pointermove',e=>{if(drag){const dx=e.clientX-drag.x;drag.x=e.clientX;x+=dx;v=dx;return}if(e.pointerType!=='mouse')return;
+    const r=wrap.getBoundingClientRect(),k=(e.clientX-r.left)/r.width,z=.38;target=k>1-z?-((k-(1-z))/z)*9:k<z?((z-k)/z)*9:0;
+    L.classList.toggle('on',target>0);R.classList.toggle('on',target<0);});
+  wrap.addEventListener('pointerleave',()=>{target=idle;L.classList.remove('on');R.classList.remove('on')});
+  wrap.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')drag={x:e.clientX}});
+  addEventListener('pointerup',()=>{if(drag){drag=null;target=idle}});addEventListener('pointercancel',()=>{drag=null});
+  wrap.addEventListener('wheel',e=>{if(Math.abs(e.deltaX)>Math.abs(e.deltaY)){e.preventDefault();x-=e.deltaX;}},{passive:false});
+  el.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){x-=320;e.preventDefault()}if(e.key==='ArrowLeft'){x+=320;e.preventDefault()}});})();
+
+/* ---------- motion ---------- */
+if(!HAS_GSAP||RM){autoPeek();return;}
+const drawPaths=s=>$$(s).forEach(p=>{p.style.strokeDasharray=1;p.style.strokeDashoffset=1;});
+drawPaths('#hlRing,#scoreRing,.note-l path,#tableArt path,#pourArt path,.h-info .deco *');
+$$('#chopDood,#spoonDood').forEach(s=>{s.style.strokeDasharray=1;s.style.strokeDashoffset=1});
+$$('#title span').forEach(s=>{s.innerHTML=[...s.textContent].map(c=>`<span class="ch">${c}</span>`).join('')});
+gsap.timeline({defaults:{ease:'power3.out'}})
+  .from('#title .ch',{yPercent:110,rotate:()=>rand(-14,14),opacity:0,duration:.9,stagger:.05})
+  .from('.sun',{scale:.6,rotate:-40,opacity:0,duration:1.2},.2)
+  .from('#bowl',{scale:.7,rotate:-60,opacity:0,duration:1.3,ease:'power4.out'},.35)
+  .to(heroDoods,{strokeDashoffset:0,duration:.9,stagger:{each:.012,from:'random'},ease:'power1.inOut'},.2)
+  .to(['#chopDood','#spoonDood'],{strokeDashoffset:0,duration:1.1,stagger:.2,ease:'power2.inOut'},.9)
+  .to('.note-l path',{strokeDashoffset:0,duration:.9,stagger:.15},1.1)
+  .from('.hmeta',{opacity:0,y:12,duration:.6,stagger:.1},.6)
+  .from('#peek,.note-l',{opacity:0,duration:.6},1.3)
+  .add(autoPeek,1.6);
+gsap.to('#heroField',{y:-100,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+
+gsap.from('.qcard',{y:70,rotate:-1.5,opacity:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:'.qcard',start:'top 85%'}});
+gsap.to('#tableArt path',{strokeDashoffset:0,duration:1.6,stagger:.05,ease:'power1.inOut',scrollTrigger:{trigger:'.qcard',start:'top 65%'}});
+(function(){const q=$('#quoteText');const walk=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(w=>{if(!w)return;if(/^\s+$/.test(w)){f.appendChild(document.createTextNode(w));return;}const s=document.createElement('span');s.className='w';s.textContent=w;f.appendChild(s)});c.replaceWith(f)}else if(c.nodeType===1&&c.tagName!=='svg'&&!c.classList.contains('hl'))walk(c)})};walk(q);
+  gsap.fromTo(q.querySelectorAll('.w,.hl'),{opacity:.2},{opacity:1,stagger:.1,ease:'none',scrollTrigger:{trigger:q,start:'top 80%',end:'bottom 45%',scrub:true}});
+  gsap.to('#hlRing',{strokeDashoffset:0,duration:1,ease:'power2.inOut',scrollTrigger:{trigger:q,start:'center 55%'}});})();
+
+$$('.dish').forEach(d=>{const dir=d.dataset.side==='left'?-1:1;
+  gsap.from(d.querySelector('.plate'),{rotate:dir*-40,scale:.85,opacity:0,ease:'none',scrollTrigger:{trigger:d,start:'top 95%',end:'top 50%',scrub:1}});
+  gsap.fromTo(d.querySelector('.hand'),{xPercent:dir*120,yPercent:dir*10},{xPercent:0,yPercent:0,ease:'power2.out',scrollTrigger:{trigger:d,start:'top 85%',end:'center 50%',scrub:1.2}});
+  gsap.from(d.querySelector('.docket'),{y:60,rotate:dir*12,opacity:0,duration:.9,ease:'back.out(1.5)',scrollTrigger:{trigger:d,start:'top 70%'}});});
+gsap.from('.menu-head > *',{y:30,opacity:0,stagger:.1,duration:.8,ease:'power3.out',scrollTrigger:{trigger:'.menu-head',start:'top 80%'}});
+
+gsap.from('.rv',{y:70,opacity:0,stagger:.06,duration:.9,ease:'back.out(1.3)',scrollTrigger:{trigger:'#notes',start:'top 80%'}});
+gsap.to('#scoreRing',{strokeDashoffset:0,duration:1.1,ease:'power2.inOut',scrollTrigger:{trigger:'.score',start:'top 80%'}});
+
+gsap.to('#pourArt path',{strokeDashoffset:0,duration:2,stagger:.07,ease:'power1.inOut',scrollTrigger:{trigger:'#pourArt',start:'top 75%'}});
+gsap.to('.h-info .deco *',{strokeDashoffset:0,duration:1.2,stagger:.1,scrollTrigger:{trigger:'.h-info',start:'top 70%'}});
+gsap.from('.h-art .big',{x:-40,opacity:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:'.h-art',start:'top 70%'}});
+gsap.from('.days li',{x:30,opacity:0,stagger:.06,duration:.6,ease:'power2.out',scrollTrigger:{trigger:'.days',start:'top 80%',onEnter:()=>{const t=$('.days .today path');if(t){t.style.strokeDasharray=1;t.style.strokeDashoffset=1;gsap.to(t,{strokeDashoffset:0,duration:1,delay:.6})}}}});
+
+gsap.from('.mapframe',{y:60,rotate:6,opacity:0,duration:1.1,ease:'power3.out',scrollTrigger:{trigger:'.mapframe',start:'top 85%'}});
+gsap.from('.loc .h2, .loc address, .loc .acts',{y:30,opacity:0,stagger:.1,duration:.8,scrollTrigger:{trigger:'.loc',start:'top 70%'}});
+gsap.from('.endcard h2',{yPercent:30,opacity:0,duration:1.2,ease:'power4.out',scrollTrigger:{trigger:'.end',start:'top 75%'}});
+})();
+</script>
+
+<script type="module">
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,cv=document.getElementById('grain');
+try{const THREE=await import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js');
+  const r=new THREE.WebGLRenderer({canvas:cv,alpha:false,antialias:false,powerPreference:'low-power'});r.setPixelRatio(1);
+  const scene=new THREE.Scene(),cam=new THREE.OrthographicCamera(-1,1,1,-1,0,1),u={uT:{value:0}};
+  scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2),new THREE.ShaderMaterial({uniforms:u,vertexShader:'void main(){gl_Position=vec4(position.xy,0.,1.);}',
+    fragmentShader:`precision mediump float;uniform float uT;float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+    float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+1.),f.x),f.y);}
+    void main(){vec2 p=gl_FragCoord.xy;float fr=floor(uT*8.);float g=h(p+fr*31.7);float fib=n(p*vec2(.02,.18))*.5+n(p*.06)*.5;gl_FragColor=vec4(vec3(.9+g*.1-fib*.06),1.);}`})));
+  const size=()=>r.setSize(innerWidth,innerHeight,false);size();addEventListener('resize',size);
+  let last=0;const tick=t=>{if(t-last>110){last=t;u.uT.value=t/1000;r.render(scene,cam);}if(!RM)requestAnimationFrame(tick);};requestAnimationFrame(tick);
+}catch(e){cv.remove();}
+</script>
+</body>
+</html>
