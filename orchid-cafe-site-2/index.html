@@ -34,9 +34,9 @@ a{color:#2E6B4A}a:hover{color:#17301F}
 .oc-pc{transition:transform .45s cubic-bezier(.2,.7,.1,1),box-shadow .45s}
 .oc-pc:hover{transform:translateY(-5px) !important;box-shadow:0 26px 50px -26px rgba(23,48,31,.45) !important}
 /* hero */
-.oc-hero{position:relative;height:100svh;min-height:640px;max-height:920px;border-radius:28px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between}
+.oc-hero{position:relative;min-height:max(640px,100svh);border-radius:28px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between}
 .oc-bowlwrap{position:absolute;left:50%;bottom:-22%;transform:translateX(-50%);width:min(560px,46vw);aspect-ratio:1/1;border-radius:50%;box-shadow:0 60px 120px -30px rgba(5,20,8,.75);z-index:1}
-.oc-herobottom{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;gap:14px;padding:0 clamp(14px,2.4vw,32px) clamp(14px,2.4vw,32px)}
+.oc-herobottom{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;gap:14px;padding:0 clamp(16px,2.4vw,32px) clamp(20px,2.6vw,36px)}
 /* bento */
 .oc-bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
 .oc-l{grid-column:span 6}
@@ -57,9 +57,49 @@ a{color:#2E6B4A}a:hover{color:#17301F}
 .oc-day.oc-closed{border:2px dashed #B9B3A0;background:transparent;color:#7A7566;text-decoration:line-through}
 .oc-day[aria-pressed="true"]{background:#17301F;color:#F6F4EC}
 #oc-flip.is-flipped{transform:rotateY(180deg)}
-#oc-stub.is-torn{transform:translate(100px,70px) rotate(22deg);opacity:0;pointer-events:none}
 #oc-drawer[hidden],#oc-reset[hidden]{display:none !important}
 html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto !important}.lenis.lenis-stopped{overflow:hidden}
+
+/* specials header */
+.oc-menuhead{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:34px}
+.oc-bigmenu{appearance:none;border:0;cursor:pointer;background:#C8F169;color:#17301F;border-radius:22px;padding:0 14px 0 30px;min-height:84px;display:inline-flex;align-items:center;gap:22px;font-family:Anton,sans-serif;font-size:clamp(26px,2.6vw,36px);text-transform:uppercase;letter-spacing:.01em;box-shadow:0 0 0 3px #17301F,0 18px 36px -16px rgba(23,48,31,.55)}
+.oc-bigmenu .oc-arr{width:56px;height:56px;border-radius:50%;background:#17301F;color:#C8F169;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.oc-bigmenu:hover .oc-arr{transform:rotate(-45deg)}
+@media (max-width:600px){.oc-bigmenu{width:100%;justify-content:space-between}}
+.oc-cta-card{background:#17301F !important;color:#FBF8EF;display:flex;flex-direction:column;justify-content:space-between;padding:24px;gap:18px}
+/* menu modal */
+#oc-menu[hidden]{display:none !important}
+#oc-menu{position:fixed;inset:0;z-index:70;background:rgba(23,48,31,.55);display:flex;align-items:center;justify-content:center;padding:clamp(8px,3vw,40px)}
+#oc-menu .oc-sheet{position:relative;width:min(1080px,100%);max-height:100%;overflow-y:auto;overscroll-behavior:contain;background:#FBF8EF;border-radius:24px;padding:clamp(22px,4vw,48px)}
+.oc-mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,48px)}
+.oc-mcat h3{margin:0 0 4px;font-family:'Instrument Serif',serif;font-weight:400;font-size:34px;line-height:1}
+.oc-mcat .oc-mnote{font-size:12px;color:#6B6A60;margin-bottom:10px}
+.oc-mi{display:grid;grid-template-columns:1fr auto;gap:2px 16px;padding:12px 0;border-top:1px dashed #CFC9B6}
+.oc-mi b{font-weight:800;font-size:15px}.oc-mi span{font-family:Anton,sans-serif;font-size:18px}
+.oc-mi p{grid-column:1/-1;margin:0;font-size:13px;line-height:1.45;color:#3C4A3F}
+/* boarding pass */
+.oc-ticket{display:flex;align-items:stretch;filter:drop-shadow(0 22px 26px rgba(23,48,31,.22));transform-origin:50% 60%}
+.oc-tk-main{position:relative;flex:1 1 auto;min-width:0;min-height:220px;perspective:1600px}
+.oc-tk-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px 0 0 20px;overflow:hidden;transition:border-radius .4s}
+.oc-ticket.is-torn .oc-tk-face{border-radius:20px}
+.oc-tk-stub{position:relative;flex:0 0 168px;min-height:220px;border:0;margin:0;cursor:pointer;font-family:inherit;color:#17301F;background:#C8F169;border-radius:0 20px 20px 0;border-left:3px dashed #17301F;padding:18px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;transition:transform .9s cubic-bezier(.5,0,.2,1),opacity .7s .2s}
+.oc-tk-stub::before,.oc-tk-stub::after{content:"";position:absolute;left:-13px;width:22px;height:22px;border-radius:50%;background:#EDEADF}
+.oc-tk-stub::before{top:-11px}.oc-tk-stub::after{bottom:-11px}
+.oc-tk-stub:hover{background:#D7F78A}
+.oc-tk-stub:focus-visible{outline:3px solid #17301F;outline-offset:3px}
+.oc-tk-stub.is-torn{transform:translate(140px,90px) rotate(24deg);opacity:0;pointer-events:none}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+.oc-tk-stub .oc-scissor{animation:nudge 1.2s ease-in-out infinite}
+@media (max-width:560px){
+.oc-ticket{flex-direction:column}
+.oc-tk-face{border-radius:20px 20px 0 0}
+.oc-tk-stub{flex:0 0 auto;min-height:0;border-left:0;border-top:3px dashed #17301F;border-radius:0 0 20px 20px;flex-direction:row;justify-content:center;gap:12px;padding:16px 18px}
+.oc-tk-stub::before{top:-13px;left:-11px}.oc-tk-stub::after{top:-13px;bottom:auto;left:auto;right:-11px}
+.oc-tk-stub .oc-tearbig br{display:none}.oc-tk-stub .oc-tearbig{font-size:26px !important}
+.oc-tk-stub>span:last-child{display:none}
+.oc-tk-stub.is-torn{transform:translate(30px,120px) rotate(10deg)}
+}
+@media (prefers-reduced-motion:reduce){.oc-tk-stub .oc-scissor{animation:none}}
 </style>
 </head>
 <body>
@@ -95,7 +135,9 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto 
 
 <!-- bowl -->
 <div class="oc-bowlwrap">
+<div class="oc-bowlspin" style="width: 100%; height: 100%">
 <img class="oc-bowl" src="assets/pho.png" alt="Top-down bowl of beef phở with herbs, chilli and rice noodles" style="width: 100%; height: 100%; object-fit: contain; border-radius: 50%">
+</div>
 </div>
 
 <!-- bottom row -->
@@ -153,6 +195,28 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto 
 <!-- ============ 2. QUOTE (compact) ============ -->
 
 
+
+<!-- full menu -->
+<div id="oc-menu" hidden role="dialog" aria-modal="true" aria-labelledby="oc-menu-title">
+<button type="button" data-close-menu aria-label="Close menu" style="position: absolute; inset: 0; background: transparent; border: 0; cursor: pointer"></button>
+<div class="oc-sheet" data-lenis-prevent>
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 26px">
+<div>
+<div style="font-family: Caveat, cursive; font-size: 26px; color: #C2558A">thực đơn · the menu</div>
+<h2 id="oc-menu-title" style="margin: 2px 0 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(44px, 6vw, 80px); line-height: .9">Orchid Cafe Menu</h2>
+<div style="font-size: 13px; margin-top: 8px">Mon, Tue, Fri, Sat · 7:30am – 2:30pm · Call ahead: <a href="tel:0423245052" style="font-weight: 800">0423 245 052</a></div>
+</div>
+<button type="button" data-close-menu aria-label="Close menu" style="flex-shrink: 0; width: 52px; height: 52px; border-radius: 50%; border: 0; background: #17301F; color: #FBF8EF; cursor: pointer; font-size: 26px">×</button>
+</div>
+<div class="oc-mgrid">
+<div class="oc-mcat"><h3>Vietnamese Specials</h3><div class="oc-mnote">From our family kitchen · sample prices, to be confirmed</div><div class="oc-mi"><b>Phở bò</b><span>$18.50</span><p>Beef noodle soup, rice noodles, Thai basil, bean sprouts, lime, chilli.</p></div><div class="oc-mi"><b>Bún chả nem</b><span>$19.50</span><p>Chargrilled pork, crispy spring rolls, vermicelli, herbs, nước chấm.</p></div><div class="oc-mi"><b>Bánh mì thịt</b><span>$13.50</span><p>Toasted roll, roast pork, pâté, pickled carrot, coriander, chilli.</p></div><div class="oc-mi"><b>Gỏi cuốn (2)</b><span>$9.00</span><p>Fresh rice-paper rolls with prawn, pork and herbs, peanut dipping sauce.</p></div><div class="oc-mi"><b>Cơm gà</b><span>$17.50</span><p>Lemongrass chicken on rice with pickles and fried egg.</p></div></div>
+<div class="oc-mcat"><h3>Breakfast</h3><div class="oc-mnote">Served all day</div><div class="oc-mi"><b>Toast</b><span>$8.00</span><p>Sourdough or Turkish with condiments.</p></div><div class="oc-mi"><b>Avocado Toast</b><span>$15.00</span><p>Smashed avocado, spinach, poached eggs, fetta and dukkah on sourdough.</p></div><div class="oc-mi"><b>Breakfast Wrap</b><span>$13.80</span><p>Spinach, double bacon, 2 fried eggs, cheese and sauce, with hash brown.</p></div><div class="oc-mi"><b>Egg Your Way</b><span>$12.20</span><p>2 poached, fried or scrambled eggs on sourdough.</p></div><div class="oc-mi"><b>Bacon &amp; Egg Roll</b><span>$12.50</span><p>Double bacon, 2 fried eggs, cheese and your favourite sauce.</p></div><div class="oc-mi"><b>Halloumi Stack</b><span>$18.00</span><p>Grilled halloumi, avocado, bacon, spinach, 2 poached eggs, spiced pumpkin spread.</p></div><div class="oc-mi"><b>BLAT Sandwich</b><span>$15.80</span><p>Bacon, lettuce, tomato, avocado on sourdough or brioche. Add 2 hash browns $4.</p></div><div class="oc-mi"><b>Orchid Egg Benedict</b><span>$15.50</span><p>2 poached eggs on toasted croissant, sautéed spinach, Orchid hollandaise.</p></div><div class="oc-mi"><b>Big Breakfast Platter</b><span>$26.00</span><p>Bacon, 2 eggs your way, tomato, mushroom, beans, avocado, spinach, hash browns, sourdough.</p></div><div class="oc-mi"><b>Vegetarian Big Breakfast</b><span>$24.80</span><p>Halloumi, 2 eggs your way, mushrooms, tomato, beans, spinach, hash browns, avocado, sourdough.</p></div></div>
+<div class="oc-mcat"><h3>Brunch &amp; Lunch</h3><div class="oc-mnote">11am – 2:30pm</div><div class="oc-mi"><b>Pumpkin Soup</b><span>$15.20</span><p>Roast sweet potato and pumpkin soup with coconut cream, served with sourdough.</p></div><div class="oc-mi"><b>Chicken Avocado Wrap</b><span>$12.50</span><p>Roast chicken, mayo, spinach, tomato, avocado in tortilla, toasted. Add chips $4.</p></div><div class="oc-mi"><b>Reuben Beef Sandwich</b><span>$18.50</span><p>House-made corned beef on sourdough, Swiss cheese, sauerkraut, Russian dressing, chips.</p></div><div class="oc-mi"><b>Empress Bowl</b><span>$13.60</span><p>Kale, brown rice, Spanish onion, broccolini, boiled egg, cucumber, sesame dressing. Add chicken $6.</p></div><div class="oc-mi"><b>Teriyaki Tofu Soba Salad</b><span>$15.80</span><p>Soba, cabbage-carrot slaw, teriyaki tofu, edamame, soy sesame dressing.</p></div><div class="oc-mi"><b>Steak Sandwich</b><span>$21.50</span><p>180g scotch fillet on Turkish, mayo, mesclun, tomato, cheese, onion jam, smoky BBQ.</p></div><div class="oc-mi"><b>Angus Beef Burger</b><span>$18.40</span><p>Angus patty, BLT, Orchid burger sauce, onion jam, American cheese, chips.</p></div><div class="oc-mi"><b>Chicken Schnitzel Burger</b><span>$17.60</span><p>Corn-crusted schnitzel, chipotle mayo, cabbage slaw, cheese, chips.</p></div></div>
+<div class="oc-mcat"><h3>Drinks</h3><div class="oc-mnote">Sample prices, to be confirmed · +$1 plant milk or extra shot</div><div class="oc-mi"><b>Cà phê sữa đá</b><span>$6.50</span><p>Vietnamese phin coffee over ice with condensed milk.</p></div><div class="oc-mi"><b>Cà phê đen</b><span>$5.50</span><p>Strong black phin coffee, hot or iced.</p></div><div class="oc-mi"><b>Flat White / Latte / Cappuccino</b><span>$5.00</span><p>Regular; large $5.80.</p></div><div class="oc-mi"><b>Long Black / Espresso</b><span>$4.50</span><p></p></div><div class="oc-mi"><b>Fresh Juice</b><span>$8.50</span><p>Orange, apple or watermelon. +$1 per extra ingredient.</p></div></div>
+</div>
+</div>
+</div>
+
 <!-- heritage drawer -->
 <div id="oc-drawer" hidden role="dialog" aria-modal="true" aria-label="Our heritage story" style="position: fixed; inset: 0; z-index: 60; background: rgba(23,48,31,.45); display: flex; justify-content: flex-end">
 <button data-close-story aria-label="Close story" style="position: absolute; inset: 0; background: transparent; border: 0; cursor: pointer"></button>
@@ -193,92 +257,22 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto 
 <!-- ============ 3. SPECIALS (bento postcards) ============ -->
 <section id="menu" style="padding: clamp(44px, 6vw, 80px) clamp(16px, 3vw, 40px) clamp(40px, 5vw, 64px)">
 <div style="max-width: 1320px; margin: 0 auto">
-<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 22px">
+<div class="oc-menuhead">
 <div>
 <div style="font-family: Caveat, cursive; font-size: 26px; color: #C2558A">postcards from the kitchen</div>
 <h2 style="margin: 2px 0 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(52px, 7vw, 104px); line-height: .9; letter-spacing: -.03em">Specials</h2>
 </div>
-<a class="oc-btn oc-cta" href="https://orchidcafe.net/menu" style="text-decoration: none; background: #17301F; color: #FBF8EF; border-radius: 18px; padding: 0 12px 0 24px; min-height: 60px; display: inline-flex; align-items: center; gap: 16px; font-family: Anton, sans-serif; font-size: 22px; text-transform: uppercase">
-View full menu
-<span style="width: 40px; height: 40px; border-radius: 50%; background: #F7C3DA; color: #17301F; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></span>
-</a>
+<button type="button" class="oc-btn oc-bigmenu" data-open-menu aria-haspopup="dialog">View full menu
+<span class="oc-arr"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></span>
+</button>
 </div>
 
 <div class="oc-bento">
-
 <article class="oc-pc oc-l" style="background:#FBF8EF;border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(23,48,31,.45);outline:1px solid rgba(23,48,31,.06);min-width:0;transform:rotate(-.6deg);">
-<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); height: 100%; min-height: 300px">
-<div style="position:relative;background:#E9F2D5;display:flex;align-items:center;justify-content:center;overflow:hidden;min-height:300px;padding:18px;"><img loading="lazy" src="assets/pho.png" alt="Bowl of beef phở" style="position:absolute;inset:8%;width:84%;height:84%;object-fit:contain;filter:drop-shadow(0 18px 22px rgba(23,48,31,.28))"></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); height: 100%; min-height: 320px">
+<div style="position: relative; overflow: hidden; min-height: 320px"><img loading="lazy" src="assets/benny.webp" alt="Eggs benedict on a toasted croissant with spinach" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
 <div style="position: relative; padding: 22px 22px 20px; display: flex; flex-direction: column; gap: 8px; border-left: 1px dashed #CFC9B6">
-<div style="position: absolute; top: 14px; right: 14px; width: 46px; height: 56px; border: 2px dashed #E3A7C2; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: Anton, sans-serif; font-size: 11px; color: #C2558A; text-align: center; line-height: 1.05; padding: 3px; transform: rotate(4deg)">PHỞ</div>
-<div style="font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #2E6B4A; padding-right: 56px">Hà Nội · house special</div>
-<h3 style="margin: 4px 0 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 38px; line-height: .95; padding-right: 40px">Phở bò</h3>
-<div style="font-family: Caveat, cursive; font-size: 22px; line-height: 1.05; color: #C2558A">broth on since early morning</div>
-<p style="margin: 0; flex: 1; font-size: 14px; line-height: 1.5">Beef noodle soup with rice noodles, Thai basil, bean sprouts, lime and fresh chilli.</p>
-<div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2DDCC; padding-top: 10px">
-<span style="font-family: Anton, sans-serif; font-size: 24px">$18.50</span><span style="font-size: 12px; font-weight: 700; color: #2E6B4A">ready ~20 min</span>
-</div>
-</div>
-</div>
-</article>
-
-
-<article class="oc-pc oc-p" style="background:#FBF8EF;border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(23,48,31,.45);outline:1px solid rgba(23,48,31,.06);min-width:0;transform:rotate(.8deg);">
-<div style="display: flex; flex-direction: column; height: 100%">
-<div style="position:relative;height:0;padding-bottom:90%;background:#FFF3C4;overflow:hidden;">
-<img loading="lazy" src="assets/banhmi.png" alt="Bánh mì roll in a bamboo basket" style="position:absolute;inset:8%;width:84%;height:84%;object-fit:contain;filter:drop-shadow(0 18px 22px rgba(23,48,31,.28))">
-<div style="position: absolute; top: 12px; right: 12px; width: 40px; height: 48px; background: #FBF8EF; border: 2px dashed #E3A7C2; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: Anton, sans-serif; font-size: 10px; color: #C2558A; text-align: center; line-height: 1.05; padding: 3px; transform: rotate(4deg)">BÁNH MÌ</div>
-</div>
-<div style="padding: 16px 18px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; border-top: 1px dashed #CFC9B6">
-<h3 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 30px; line-height: .95">Bánh mì thịt</h3>
-<p style="margin: 0; flex: 1; font-size: 13px; line-height: 1.45">Crackly roll, roast pork, pâté, pickled carrot, coriander and chilli.</p>
-<div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2DDCC; padding-top: 8px">
-<span style="font-family: Anton, sans-serif; font-size: 22px">$13.50</span><span style="font-size: 12px; font-weight: 700; color: #2E6B4A">grab &amp; go</span>
-</div>
-</div>
-</div>
-</article>
-
-
-<article class="oc-pc oc-p" style="background:#FBF8EF;border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(23,48,31,.45);outline:1px solid rgba(23,48,31,.06);min-width:0;transform:rotate(-.8deg);">
-<div style="display: flex; flex-direction: column; height: 100%">
-<div style="position:relative;height:0;padding-bottom:90%;background:#FCE3EE;overflow:hidden;">
-<img loading="lazy" src="assets/wrap.png" alt="Toasted chicken wrap cut in half" style="position:absolute;inset:8%;width:84%;height:84%;object-fit:contain;filter:drop-shadow(0 18px 22px rgba(23,48,31,.28))">
-<div style="position: absolute; top: 12px; right: 12px; width: 40px; height: 48px; background: #FBF8EF; border: 2px dashed #E3A7C2; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: Anton, sans-serif; font-size: 10px; color: #C2558A; text-align: center; line-height: 1.05; padding: 3px; transform: rotate(4deg)">LUNCH</div>
-</div>
-<div style="padding: 16px 18px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; border-top: 1px dashed #CFC9B6">
-<h3 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 30px; line-height: .95">Chicken Avo Wrap</h3>
-<p style="margin: 0; flex: 1; font-size: 13px; line-height: 1.45">Roast chicken, avocado, spinach and tomato, toasted. Add chips $4.</p>
-<div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2DDCC; padding-top: 8px">
-<span style="font-family: Anton, sans-serif; font-size: 22px">$12.50</span><span style="font-size: 12px; font-weight: 700; color: #2E6B4A">desk-friendly</span>
-</div>
-</div>
-</div>
-</article>
-
-
-<article class="oc-pc oc-p" style="background:#FBF8EF;border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(23,48,31,.45);outline:1px solid rgba(23,48,31,.06);min-width:0;transform:rotate(.6deg);">
-<div style="display: flex; flex-direction: column; height: 100%">
-<div style="position:relative;height:0;padding-bottom:90%;background:#EDEADF;overflow:hidden;">
-<img loading="lazy" src="assets/coffee.webp" alt="Iced coffee" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-<div style="position: absolute; top: 12px; right: 12px; width: 40px; height: 48px; background: #FBF8EF; border: 2px dashed #E3A7C2; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: Anton, sans-serif; font-size: 10px; color: #C2558A; text-align: center; line-height: 1.05; padding: 3px; transform: rotate(4deg)">CÀ PHÊ</div>
-</div>
-<div style="padding: 16px 18px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; border-top: 1px dashed #CFC9B6">
-<h3 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 30px; line-height: .95">Cà phê sữa đá</h3>
-<p style="margin: 0; flex: 1; font-size: 13px; line-height: 1.45">Slow-dripped phin coffee over ice with sweet condensed milk.</p>
-<div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2DDCC; padding-top: 8px">
-<span style="font-family: Anton, sans-serif; font-size: 22px">$6.50</span><span style="font-size: 12px; font-weight: 700; color: #2E6B4A">iced</span>
-</div>
-</div>
-</div>
-</article>
-
-
-<article class="oc-pc oc-l" style="background:#FBF8EF;border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(23,48,31,.45);outline:1px solid rgba(23,48,31,.06);min-width:0;transform:rotate(.5deg);">
-<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); height: 100%; min-height: 300px">
-<div style="position:relative;background:#EDEADF;display:flex;align-items:center;justify-content:center;overflow:hidden;min-height:300px;"><img loading="lazy" src="assets/benny.webp" alt="Eggs benedict on croissant" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
-<div style="position: relative; padding: 22px 22px 20px; display: flex; flex-direction: column; gap: 8px; border-left: 1px dashed #CFC9B6">
-<div style="position: absolute; top: 14px; right: 14px; width: 46px; height: 56px; border: 2px dashed #E3A7C2; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: Anton, sans-serif; font-size: 11px; color: #C2558A; text-align: center; line-height: 1.05; padding: 3px; transform: rotate(4deg)">AUS</div>
+<div style="position: absolute; top: 14px; right: 14px; width: 46px; height: 56px; background: #FBF8EF; border: 2px dashed #E3A7C2; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: Anton, sans-serif; font-size: 11px; color: #C2558A; text-align: center; line-height: 1.05; padding: 3px; transform: rotate(4deg)">AUS</div>
 <div style="font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #2E6B4A; padding-right: 56px">Aussie brunch · all day</div>
 <h3 style="margin: 4px 0 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 38px; line-height: .95; padding-right: 40px">Orchid Benny</h3>
 <div style="font-family: Caveat, cursive; font-size: 22px; line-height: 1.05; color: #C2558A">our brunch favourite</div>
@@ -289,26 +283,76 @@ View full menu
 </div>
 </div>
 </article>
-
-
-<article class="oc-pc oc-p" style="background:#FBF8EF;border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(23,48,31,.45);outline:1px solid rgba(23,48,31,.06);min-width:0;transform:rotate(-.6deg);">
+<article class="oc-pc oc-p" style="background:#FBF8EF;border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(23,48,31,.45);outline:1px solid rgba(23,48,31,.06);min-width:0;transform:rotate(.8deg);">
 <div style="display: flex; flex-direction: column; height: 100%">
-<div style="position:relative;height:0;padding-bottom:90%;background:#EDEADF;overflow:hidden;">
-<img loading="lazy" src="assets/brunch.webp" alt="Brunch plate" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-<div style="position: absolute; top: 12px; right: 12px; width: 40px; height: 48px; background: #FBF8EF; border: 2px dashed #E3A7C2; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: Anton, sans-serif; font-size: 10px; color: #C2558A; text-align: center; line-height: 1.05; padding: 3px; transform: rotate(4deg)">BRUNCH</div>
+<div style="position: relative; height: 0; padding-bottom: 90%; overflow: hidden">
+<img loading="lazy" src="assets/bacon.webp" alt="Bacon and egg roll with hash browns" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+<div style="position: absolute; top: 12px; right: 12px; width: 40px; height: 48px; background: #FBF8EF; border: 2px dashed #E3A7C2; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: Anton, sans-serif; font-size: 10px; color: #C2558A; text-align: center; line-height: 1.05; padding: 3px; transform: rotate(4deg)">B&amp;E</div>
 </div>
 <div style="padding: 16px 18px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; border-top: 1px dashed #CFC9B6">
-<h3 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 30px; line-height: .95">Big Breakfast</h3>
-<p style="margin: 0; flex: 1; font-size: 13px; line-height: 1.45">Bacon, eggs your way, mushroom, beans, avocado, hash browns and sourdough.</p>
+<h3 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 30px; line-height: .95">Bacon &amp; Egg Roll</h3>
+<p style="margin: 0; flex: 1; font-size: 13px; line-height: 1.45">Double bacon, two fried eggs, cheese and your favourite sauce. Add hash browns.</p>
 <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2DDCC; padding-top: 8px">
-<span style="font-family: Anton, sans-serif; font-size: 22px">$26.00</span><span style="font-size: 12px; font-weight: 700; color: #2E6B4A">weekend fuel</span>
+<span style="font-family: Anton, sans-serif; font-size: 22px">$12.50</span><span style="font-size: 12px; font-weight: 700; color: #2E6B4A">grab &amp; go</span>
 </div>
 </div>
 </div>
 </article>
-
+<article class="oc-pc oc-p" style="background:#FBF8EF;border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(23,48,31,.45);outline:1px solid rgba(23,48,31,.06);min-width:0;transform:rotate(-.8deg);">
+<div style="display: flex; flex-direction: column; height: 100%">
+<div style="position: relative; height: 0; padding-bottom: 90%; overflow: hidden">
+<img loading="lazy" src="assets/angus.webp" alt="Angus beef burger with chips on a wooden board" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+<div style="position: absolute; top: 12px; right: 12px; width: 40px; height: 48px; background: #FBF8EF; border: 2px dashed #E3A7C2; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: Anton, sans-serif; font-size: 10px; color: #C2558A; text-align: center; line-height: 1.05; padding: 3px; transform: rotate(4deg)">LUNCH</div>
 </div>
-<p style="margin: 14px 0 0; font-size: 12px; color: #6B6A60">Vietnamese dish prices are samples — to be confirmed by Orchid Cafe.</p>
+<div style="padding: 16px 18px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; border-top: 1px dashed #CFC9B6">
+<h3 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 30px; line-height: .95">Angus Beef Burger</h3>
+<p style="margin: 0; flex: 1; font-size: 13px; line-height: 1.45">Angus patty, BLT, Orchid burger sauce, onion jam, American cheese and chips.</p>
+<div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2DDCC; padding-top: 8px">
+<span style="font-family: Anton, sans-serif; font-size: 22px">$18.40</span><span style="font-size: 12px; font-weight: 700; color: #2E6B4A">lunch</span>
+</div>
+</div>
+</div>
+</article>
+<article class="oc-pc oc-p" style="background:#FBF8EF;border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(23,48,31,.45);outline:1px solid rgba(23,48,31,.06);min-width:0;transform:rotate(.6deg);">
+<div style="display: flex; flex-direction: column; height: 100%">
+<div style="position: relative; height: 0; padding-bottom: 90%; overflow: hidden">
+<img loading="lazy" src="assets/coffee.webp" alt="Flat white beside a plate of avocado toast" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+<div style="position: absolute; top: 12px; right: 12px; width: 40px; height: 48px; background: #FBF8EF; border: 2px dashed #E3A7C2; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: Anton, sans-serif; font-size: 10px; color: #C2558A; text-align: center; line-height: 1.05; padding: 3px; transform: rotate(4deg)">CÀ PHÊ</div>
+</div>
+<div style="padding: 16px 18px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; border-top: 1px dashed #CFC9B6">
+<h3 style="margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 30px; line-height: .95">Avo Toast &amp; Flat White</h3>
+<p style="margin: 0; flex: 1; font-size: 13px; line-height: 1.45">Smashed avocado, poached eggs, fetta and dukkah on sourdough — with a coffee.</p>
+<div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2DDCC; padding-top: 8px">
+<span style="font-family: Anton, sans-serif; font-size: 22px">$15.00</span><span style="font-size: 12px; font-weight: 700; color: #2E6B4A">+ coffee $5</span>
+</div>
+</div>
+</div>
+</article>
+<article class="oc-pc oc-l" style="background:#FBF8EF;border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(23,48,31,.45);outline:1px solid rgba(23,48,31,.06);min-width:0;transform:rotate(.5deg);">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); height: 100%; min-height: 320px">
+<div style="position: relative; overflow: hidden; min-height: 320px"><img loading="lazy" src="assets/schnitzel.webp" alt="Chicken schnitzel burger" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
+<div style="position: relative; padding: 22px 22px 20px; display: flex; flex-direction: column; gap: 8px; border-left: 1px dashed #CFC9B6">
+<div style="position: absolute; top: 14px; right: 14px; width: 46px; height: 56px; background: #FBF8EF; border: 2px dashed #E3A7C2; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: Anton, sans-serif; font-size: 11px; color: #C2558A; text-align: center; line-height: 1.05; padding: 3px; transform: rotate(4deg)">LUNCH</div>
+<div style="font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #2E6B4A; padding-right: 56px">House-made · lunch</div>
+<h3 style="margin: 4px 0 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 38px; line-height: .95; padding-right: 40px">Chicken Schnitzel Burger</h3>
+<div style="font-family: Caveat, cursive; font-size: 22px; line-height: 1.05; color: #C2558A">crunchy, saucy, desk-worthy</div>
+<p style="margin: 0; flex: 1; font-size: 14px; line-height: 1.5">Corn-crusted chicken schnitzel, chipotle mayo, cabbage slaw, cheese and chips.</p>
+<div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2DDCC; padding-top: 10px">
+<span style="font-family: Anton, sans-serif; font-size: 24px">$17.60</span><span style="font-size: 12px; font-weight: 700; color: #2E6B4A">ready ~20 min</span>
+</div>
+</div>
+</div>
+</article>
+<article class="oc-pc oc-p oc-cta-card" style="background:#FBF8EF;border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(23,48,31,.45);outline:1px solid rgba(23,48,31,.06);min-width:0;transform:rotate(-.6deg);">
+<div>
+<div style="font-family: Caveat, cursive; font-size: 26px; color: #F7C3DA; line-height: 1">from our family kitchen</div>
+<h3 style="margin: 10px 0 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 40px; line-height: .95">Phở, bánh mì, bún chả &amp; more.</h3>
+<p style="margin: 12px 0 0; font-size: 14px; line-height: 1.5; opacity: .85">Our Vietnamese specials, breakfast all day and lunch from 11am.</p>
+</div>
+<button type="button" class="oc-btn" data-open-menu style="border: 0; cursor: pointer; background: #C8F169; color: #17301F; border-radius: 16px; min-height: 56px; font-family: Anton, sans-serif; font-size: 20px; text-transform: uppercase">See the full menu →</button>
+</article>
+</div>
+<p style="margin: 14px 0 0; font-size: 12px; color: #6B6A60">Photos and prices from the Orchid Cafe menu.</p>
 </div>
 </section>
 
@@ -318,13 +362,14 @@ View full menu
 <div style="flex: 1 1 260px; min-width: 0">
 <div style="font-family: Caveat, cursive; font-size: 26px; color: #C2558A">first time here?</div>
 <h2 style="margin: 2px 0 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(36px, 3.6vw, 54px); line-height: .95; letter-spacing: -.02em">Your ticket to Vietnam is <em>five minutes away.</em></h2>
-<p style="margin: 12px 0 0; font-size: 14px; line-height: 1.5">Tear the stub to claim your welcome offer.</p>
+<p style="margin: 12px 0 0; font-size: 14px; line-height: 1.5">Tear off the green stub to claim your welcome offer.</p>
 </div>
 
-<div id="oc-ticket" class="oc-jitter" style="flex: 2 1 560px; min-width: 0; display: flex; align-items: stretch; perspective: 1600px">
-<div style="position: relative; flex: 1 1 auto; min-width: 0; min-height: 210px">
-<div class="oc-flip" id="oc-flip" style="position:relative;width:100%;height:100%;min-height:210px;transform-style:preserve-3d">
-<div style="position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: #FBF8EF; border-radius: 20px; display: flex; overflow: hidden; box-shadow: 0 24px 50px -30px rgba(23,48,31,.45)">
+<div style="flex: 2 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+<div id="oc-ticket" class="oc-ticket oc-jitter">
+<div class="oc-tk-main">
+<div class="oc-flip" id="oc-flip" style="position: relative; width: 100%; height: 100%; min-height: 220px; transform-style: preserve-3d">
+<div class="oc-tk-face" style="background: #FBF8EF; display: flex">
 <div style="width: 44px; background: #17301F; color: #F6F4EC; display: flex; align-items: center; justify-content: center">
 <span style="writing-mode: vertical-rl; transform: rotate(180deg); font-size: 10px; font-weight: 800; letter-spacing: .28em">BOARDING PASS</span>
 </div>
@@ -344,7 +389,7 @@ View full menu
 </div>
 </div>
 </div>
-<div style="position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: rotateY(180deg); background: #17301F; color: #F6F4EC; border-radius: 20px; padding: 22px 26px; display: flex; flex-direction: column; justify-content: center; gap: 8px; overflow: hidden">
+<div class="oc-tk-face" style="transform: rotateY(180deg); background: #17301F; color: #F6F4EC; border-radius: 20px; padding: 22px 26px; display: flex; flex-direction: column; justify-content: center; gap: 8px; overflow: hidden">
 <div style="font-family: Caveat, cursive; font-size: 26px; color: #F7C3DA">chào mừng · welcome to Orchid Cafe</div>
 <div style="font-family: Anton, sans-serif; font-size: clamp(26px, 3vw, 40px); line-height: 1; text-transform: uppercase; padding-right: 70px">Your first coffee's on us —<br><span style="color: #C9E68A">or 15% off your meal.</span></div>
 <p style="margin: 0; font-size: 13px; line-height: 1.45; opacity: .85">Show this pass at the counter on your first visit. [Terms / expiry to confirm]</p>
@@ -352,14 +397,15 @@ View full menu
 </div>
 </div>
 </div>
-<button class="oc-stub" id="oc-stub" type="button" aria-label="Tear the ticket stub to reveal your welcome offer" style="flex:0 0 130px;min-height:210px;background:#FBF8EF;border:0;border-left:3px dashed #CFC9B6;border-radius:20px;padding:16px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;box-shadow:0 24px 50px -30px rgba(23,48,31,.45)">
-<div style="font-size: 10px; font-weight: 800; letter-spacing: .2em; color: #6B6A60">BOARDING</div>
-<div style="font-family: Caveat, cursive; font-size: 30px; line-height: 1; color: #C2558A; margin: 8px 0">click me</div>
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#17301F" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>
-<div style="margin-top: 10px; height: 30px; width: 100%; background: repeating-linear-gradient(90deg, #17301F 0 2px, transparent 2px 4px, #17301F 4px 7px, transparent 7px 9px)"></div>
+<button class="oc-tk-stub" id="oc-stub" type="button" aria-label="Tear here to reveal your welcome offer">
+<svg class="oc-scissor" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path></svg>
+<span class="oc-tearbig" style="font-family: Anton, sans-serif; font-size: 30px; line-height: .95; text-transform: uppercase">Tear<br> here</span>
+<span style="font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase">to claim your offer</span>
+<span aria-hidden="true" style="margin-top: 6px; height: 26px; width: 100%; background: repeating-linear-gradient(90deg, #17301F 0 2px, transparent 2px 4px, #17301F 4px 7px, transparent 7px 9px)"></span>
 </button>
 </div>
-<button id="oc-reset" type="button" hidden style="background: transparent; border: 0; font-weight: 700; color: #2E6B4A; cursor: pointer; text-decoration: underline; min-height: 44px; font-family: inherit; font-size: 13px">Reset ticket</button>
+<button id="oc-reset" type="button" hidden style="align-self: flex-start; background: transparent; border: 0; font-weight: 700; color: #2E6B4A; cursor: pointer; text-decoration: underline; min-height: 44px; font-family: inherit; font-size: 13px">Reset ticket</button>
+</div>
 </div>
 </section>
 

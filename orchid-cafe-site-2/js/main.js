@@ -9,14 +9,22 @@
   document.querySelectorAll('[data-close-story]').forEach(function (b) { b.addEventListener('click', closeStory); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && drawer && !drawer.hidden) closeStory(); });
 
+  // ---- Full menu modal ----
+  var menu = document.getElementById('oc-menu'), menuFrom = null;
+  function openMenu() { menuFrom = document.activeElement; menu.hidden = false; document.documentElement.style.overflow = 'hidden'; if (window.__lenis) window.__lenis.stop(); menu.querySelector('.oc-sheet [data-close-menu]').focus(); }
+  function closeMenu() { menu.hidden = true; document.documentElement.style.overflow = ''; if (window.__lenis) window.__lenis.start(); if (menuFrom) menuFrom.focus(); }
+  document.querySelectorAll('[data-open-menu]').forEach(function (b) { b.addEventListener('click', openMenu); });
+  document.querySelectorAll('[data-close-menu]').forEach(function (b) { b.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menu && !menu.hidden) closeMenu(); });
+
   // ---- Boarding-pass promo ----
   var stub = document.getElementById('oc-stub'), flip = document.getElementById('oc-flip'), ticket = document.getElementById('oc-ticket'), reset = document.getElementById('oc-reset'), t;
   if (stub) stub.addEventListener('click', function () {
-    stub.classList.add('is-torn'); ticket.classList.remove('oc-jitter'); reset.hidden = false;
+    stub.classList.add('is-torn'); ticket.classList.remove('oc-jitter'); ticket.classList.add('is-torn'); reset.hidden = false;
     clearTimeout(t); t = setTimeout(function () { flip.classList.add('is-flipped'); }, 500);
   });
   if (reset) reset.addEventListener('click', function () {
-    clearTimeout(t); flip.classList.remove('is-flipped'); stub.classList.remove('is-torn'); ticket.classList.add('oc-jitter'); reset.hidden = true;
+    clearTimeout(t); flip.classList.remove('is-flipped'); stub.classList.remove('is-torn'); ticket.classList.remove('is-torn'); ticket.classList.add('oc-jitter'); reset.hidden = true;
   });
 
   // ---- Opening-hours picker ----
@@ -70,18 +78,19 @@
         .from('.oc-hero nav', { y: -30, autoAlpha: 0, duration: 1 }, 0.2)
         .from('.oc-hero h1', { yPercent: 40, autoAlpha: 0, duration: 1.4 }, 0.3)
         .from(bowl, { yPercent: 40, rotate: -40, autoAlpha: 0, duration: 1.8 }, 0.45)
-        .from('.oc-herobottom > div > *', { y: 40, autoAlpha: 0, duration: 1, stagger: 0.08 }, 0.8);
+        .fromTo('.oc-herobottom > div > *', { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, stagger: 0.08, clearProps: 'transform' }, 0.8);
 
       // hero parallax while scrolling away
-      g.to('.oc-hero > img', { yPercent: 12, scale: 1.08, ease: 'none', scrollTrigger: { trigger: '#top', start: 'top top', end: 'bottom top', scrub: true } });
-      if (bowl) g.to(bowl, { yPercent: -16, rotate: 25, ease: 'none', scrollTrigger: { trigger: '#top', start: 'top top', end: 'bottom top', scrub: true } });
+      g.fromTo('.oc-hero > img', { yPercent: 0, scale: 1 }, { yPercent: 12, scale: 1.08, ease: 'none', immediateRender: false, scrollTrigger: { trigger: '#top', start: 'top top', end: 'bottom top', scrub: true } });
+      // bowl keeps spinning as you scroll (inner element, so it never fights the intro rise)
+      g.to('.oc-bowlspin', { rotate: 220, ease: 'none', scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 0.6 } });
 
       // ---- QUOTE: headline rises, heritage card slides in ----
       q('#story h2').forEach((h) => g.from(h, { y: 70, autoAlpha: 0, duration: 1.2, ease, scrollTrigger: { trigger: h, start: 'top 85%' } }));
       q('.oc-quotecta').forEach((b) => g.from(b, { x: 80, rotate: 4, autoAlpha: 0, duration: 1.2, ease, scrollTrigger: { trigger: b, start: 'top 90%' } }));
 
       // ---- SPECIALS: heading + postcards dealt onto the table ----
-      g.from('#menu h2, #menu h2 + *, #menu .oc-cta', { y: 50, autoAlpha: 0, duration: 1, ease, stagger: 0.08, scrollTrigger: { trigger: '#menu', start: 'top 80%' } });
+      g.fromTo('#menu .oc-menuhead > *', { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease, stagger: 0.08, clearProps: 'transform', scrollTrigger: { trigger: '#menu', start: 'top 85%' } });
       ST.batch('.oc-pc', {
         start: 'top 90%',
         once: true,
@@ -95,7 +104,7 @@
       if (promo) {
         g.timeline({ scrollTrigger: { trigger: promo, start: 'top 80%' }, defaults: { ease } })
           .from(promo.firstElementChild, { y: 60, autoAlpha: 0, duration: 1 })
-          .from(promo.querySelectorAll('h2, .oc-stub'), { x: 60, autoAlpha: 0, duration: 1, stagger: 0.12 }, '-=0.6');
+          .from(promo.querySelector('h2'), { x: 60, opacity: 0, duration: 1 }, '-=0.6');
       }
 
       // ---- VISIT: cards rise, map route draws ----
