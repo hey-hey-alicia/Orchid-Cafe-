@@ -7,3 +7,10 @@ Second Website Iteration: https://hey-hey-alicia.github.io/Orchid-Cafe-/orchid-c
 
 Third Website Iteration: https://hey-hey-alicia.github.io/Orchid-Cafe-/orchid-cafe-site-3-sketch/
 
+
+
+
+
+
+
+© 2026 Alicia Lin. All rights reserved. Concept design for review only
